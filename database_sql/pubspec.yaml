@@ -1,0 +1,13 @@
+name: database_sql
+version: 0.0.1
+description:
+  Package database_sql provides a generic interface around SQL-like databases.
+  The sql package must be used in conjunction with a database driver.
+homepage: https://github.com/dart-lang/sdk/tree/main/database_sql
+
+environment:
+  sdk: '>=2.13.0 <3.0.0'
+
+dev_dependencies:
+  lints: ^1.0.0
+  test: ^1.16.0
