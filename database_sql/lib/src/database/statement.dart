@@ -38,3 +38,12 @@ abstract class WriteStatement implements Statement {
   /// Executes a query such as INSERT or UPDATE with or without parameter.
   Future<Changes> exec({Iterable<dynamic>? parameters, bool reusable = false});
 }
+
+/// Utility to helper to get read/write statement
+extension FutureStatement on Future<Statement> {
+  /// return write statement future
+  Future<WriteStatement> write() => then((Statement stmt) => stmt.write());
+
+  /// return write statement future
+  Future<ReadStatement> read() => then((Statement stmt) => stmt.read());
+}
