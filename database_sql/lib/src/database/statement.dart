@@ -19,6 +19,12 @@ abstract class Statement {
   /// Some database does not support reset its state therefore it throw exception when call this
   /// method.
   Future<void> reset();
+
+  /// To a write statement
+  WriteStatement write();
+
+  /// To a read statement
+  ReadStatement read();
 }
 
 /// A statement use for SELECT query or query data in general

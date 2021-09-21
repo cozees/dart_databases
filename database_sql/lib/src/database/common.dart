@@ -6,7 +6,7 @@ abstract class SQLValue {
   ///
   /// The value return must be an SQL supported value otherwise an exception is throw. It also
   /// important not return a value of [SQLValue] too. It only expected once of above data type.
-  dynamic values();
+  dynamic value();
 }
 
 /// A class provide a method to read value SQL Value or Column from select query.
