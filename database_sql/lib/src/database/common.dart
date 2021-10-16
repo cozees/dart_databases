@@ -18,7 +18,7 @@ abstract class ValueReader {
   T? valueAt<T>(int index);
 
   /// Read an integer value by [index].
-  int? intValueAt(int index);
+  int? intValueAt(int index, [bool bit32 = false]);
 
   /// Read a string value by [index].
   String? stringValueAt(int index);
@@ -36,7 +36,7 @@ abstract class RowReader implements ValueReader {
   T? valueBy<T>(String name);
 
   /// Read an integer value by [name].
-  int? intValueBy(String name);
+  int? intValueBy(String name, [bool bit32 = false]);
 
   /// Read a string value by [name].
   String? stringValueBy(String name);

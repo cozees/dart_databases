@@ -3,7 +3,7 @@ part of 'database.dart';
 class DatabaseException implements Exception {
   final dynamic message;
 
-  DatabaseException([this.message]);
+  const DatabaseException([this.message]);
 
   @override
   String toString() {
