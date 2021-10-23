@@ -4,6 +4,8 @@ description:
   Package database_sql provides a generic interface around SQL-like databases.
   The sql package must be used in conjunction with a database driver.
 homepage: https://github.com/cozees/dart_databases/tree/master/database_sql
+repository: https://github.com/cozees/dart_databases/tree/master/database_sql
+issue_tracker: https://github.com/cozees/dart_databases/issues
 
 environment:
   sdk: '>=2.13.0 <3.0.0'
