@@ -1,0 +1,38 @@
+name: dsqlite
+version: 0.0.1
+description:
+  Package dsqlite provides a driver implement of sqlite3 for package database_sql.
+  The sql package must be used in conjunction with package database_sql.
+homepage: https://github.com/cozees/dart_databases/tree/master/dsqlite
+repository: https://github.com/cozees/dart_databases/tree/master/dsqlite
+issue_tracker: https://github.com/cozees/dart_databases/issues
+
+environment:
+  sdk: '>=2.13.0 <3.0.0'
+
+dependencies:
+  ffi: ^1.1.2
+  logging: ^1.0.2
+  js: ^0.6.3
+
+  database_sql: ^0.0.1
+
+dev_dependencies:
+  lints: ^1.0.0
+  test: ^1.16.0
+  async: ^2.8.2
+  archive: ^3.1.6 # use by executable bin/dsqlite.dart to extract dart zip file.
+  yaml: ^3.1.0
+  args: ^2.2.0
+  http: ^0.13.3
+  html: ^0.15.0
+  html_unescape: ^2.0.0
+  html2md: ^1.2.5
+  dart_style: ^2.0.3
+  coverage: ^1.0.3
+  crypto: ^3.0.1
+  code_builder: ^4.1.0
+
+dependency_overrides:
+  database_sql:
+    path: ../database_sql

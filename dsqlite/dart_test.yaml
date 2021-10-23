@@ -1,0 +1,2 @@
+# provide webassembly for testing
+custom_html_template_path: test/webassembly/custom_template.html.tmpl

@@ -1,0 +1,7970 @@
+# type available for both web and native vm
+types:
+  - sqlite3
+  - sqlite3_stmt
+  - sqlite3_value
+  - sqlite3_context
+# api support by web and native vm
+apis:
+  - sqlite3_open
+  - sqlite3_open16
+  - sqlite3_open_v2
+  - sqlite3_close
+  - sqlite3_close_v2
+  - sqlite3_changes
+  - sqlite3_total_changes
+  - sqlite3_last_insert_rowid
+  - sqlite3_extended_result_codes
+  - sqlite3_table_column_metadata
+  - sqlite3_exec
+  - sqlite3_limit
+  # statement related api
+  - sqlite3_prepare
+  - sqlite3_prepare_v2
+  - sqlite3_prepare_v3
+  - sqlite3_prepare16
+  - sqlite3_prepare16_v2
+  - sqlite3_prepare16_v3
+  - sqlite3_step
+  - sqlite3_finalize
+  - sqlite3_reset
+  - sqlite3_clear_bindings
+  - sqlite3_bind_blob
+  - sqlite3_bind_double
+  - sqlite3_bind_int
+  - sqlite3_bind_int64
+  - sqlite3_bind_text
+  - sqlite3_bind_text16
+  - sqlite3_bind_null
+  - sqlite3_bind_parameter_count
+  - sqlite3_bind_parameter_index
+  - sqlite3_bind_parameter_name
+  - sqlite3_column_count
+  - sqlite3_data_count
+  - sqlite3_column_name
+  - sqlite3_column_name16
+  - sqlite3_column_origin_name
+  - sqlite3_column_origin_name16
+  - sqlite3_column_table_name
+  - sqlite3_column_table_name16
+  - sqlite3_column_blob
+  - sqlite3_column_bytes
+  - sqlite3_column_bytes16
+  - sqlite3_column_database_name
+  - sqlite3_column_database_name16
+  - sqlite3_column_decltype
+  - sqlite3_column_decltype16
+  - sqlite3_column_type
+  - sqlite3_column_double
+  - sqlite3_column_int
+  - sqlite3_column_int64
+  - sqlite3_column_text
+  - sqlite3_column_text16
+  # custom function and hook
+  - sqlite3_create_function
+  - sqlite3_create_function16
+  - sqlite3_create_function_v2
+  - sqlite3_create_collation
+  - sqlite3_create_collation_v2
+  - sqlite3_aggregate_context
+  - sqlite3_user_data
+  - sqlite3_result_blob
+  - sqlite3_result_double
+  - sqlite3_result_error
+  - sqlite3_result_error16
+  - sqlite3_result_error_code
+  - sqlite3_result_error_nomem
+  - sqlite3_result_error_toobig
+  - sqlite3_result_int
+  - sqlite3_result_int64
+  - sqlite3_result_null
+  - sqlite3_result_text
+  - sqlite3_result_text16
+  - sqlite3_value_blob
+  - sqlite3_value_bytes
+  - sqlite3_value_bytes16
+  - sqlite3_value_double
+  - sqlite3_value_int
+  - sqlite3_value_int64
+  - sqlite3_value_double
+  - sqlite3_value_text
+  - sqlite3_value_text16
+  - sqlite3_value_type
+  - sqlite3_value_frombind
+  - sqlite3_value_numeric_type
+  - sqlite3_commit_hook
+  - sqlite3_rollback_hook
+  - sqlite3_update_hook
+  # error related api
+  - sqlite3_errcode
+  - sqlite3_extended_errcode
+  - sqlite3_errmsg
+  - sqlite3_errmsg16
+  - sqlite3_errstr
+meta:
+  - name: 'sqlite3_aggregate_context'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: nBytes
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_auto_extension'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: xEntryPoint
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xEntryPointDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_backup_init'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: sqlite3_backup
+          nullable: false
+          pointer: false
+    arguments:
+      - name: pDest
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDestName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: pSource
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSourceName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_backup_step'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: p
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_backup
+            nullable: false
+            pointer: false
+      - name: nPage
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_backup_finish'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: p
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_backup
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_backup_remaining'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: p
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_backup
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_backup_pagecount'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: p
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_backup
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_bind_blob'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        blob: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: n
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # size of the arg2
+      - name: typedefGen1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen1Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_bind_blob64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        blob: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # size of arg2
+      - name: typedefGen2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen2Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_bind_double'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: double
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_bind_int'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_bind_int64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_bind_null'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_bind_text'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # length of the pointer arg2
+      - name: typedefGen3
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen3Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_bind_text16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: 'package:ffi/ffi.dart'
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # length of the pointer arg2
+      - name: typedefGen4
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen4Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_bind_text64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        override: true
+        text: true
+        types:
+          - symbol: Uint8 # encoding is required to determine it is utf8 or utf16
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # length of the pointer arg2
+      - name: typedefGen5
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen5Def
+                nullable: false
+                pointer: false
+      - name: encoding
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_bind_value'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_bind_pointer'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: typedefGen6
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen6Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_bind_zeroblob'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: n
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_bind_zeroblob64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_bind_parameter_count'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_bind_parameter_index'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: zName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_bind_parameter_name'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_blob_bytes'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_blob
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_blob_close'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_blob
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_blob_open'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zTable
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zColumn
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: iRow
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: flags
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: ppBlob
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_blob
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_blob_read'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_blob
+            nullable: false
+            pointer: false
+      - name: Z
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        blob: true
+        transform: false
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: iOffset
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_blob_reopen'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_blob
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_blob_write'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_blob
+            nullable: false
+            pointer: false
+      - name: z
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        blob: true
+        transform: false
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: n
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: iOffset
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_busy_handler'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: typedefGen7
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen7Def
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_busy_timeout'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: ms
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_cancel_auto_extension'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: xEntryPoint
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xEntryPointDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_changes'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_clear_bindings'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_close'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_close_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_collation_needed'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: typedefGen8
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen8Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_collation_needed16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: typedefGen9
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen9Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_column_blob'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      blob: true
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_double'
+    returns:
+      symbol: double
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_int'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_int64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_text'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_text16'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: true
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_value'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: sqlite3_value
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_bytes'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_bytes16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_type'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: iCol
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_count'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_column_database_name'
+    built: true # relied on built output with SQLITE_ENABLE_COLUMN_METADATA
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_database_name16'
+    built: true # relied on built output with SQLITE_ENABLE_COLUMN_METADATA
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: true
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_table_name'
+    built: true # relied on built output with SQLITE_ENABLE_COLUMN_METADATA
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_table_name16'
+    built: true # relied on built output with SQLITE_ENABLE_COLUMN_METADATA
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: true
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_origin_name'
+    built: true # relied on built output with SQLITE_ENABLE_COLUMN_METADATA
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_origin_name16'
+    built: true # relied on built output with SQLITE_ENABLE_COLUMN_METADATA
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: true
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_decltype'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_decltype16'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: true
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_name'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_column_name16'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: true
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_commit_hook'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: typedefGen10
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen10Def
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_rollback_hook'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: typedefGen11
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen11Def
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_compileoption_used'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: zOptName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_compileoption_get'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_complete'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: sql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_complete16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: sql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_context_db_handle'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: sqlite3
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_create_collation'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: eTextRep
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pArg
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: xCompare
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xCompareDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_create_collation_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: eTextRep
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pArg
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: xCompare
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xCompareDef
+                nullable: false
+                pointer: false
+      - name: xDestroy
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xDestroyDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_create_collation16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: eTextRep
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pArg
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: xCompare
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xCompareDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_create_filename'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: zDatabase
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zJournal
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zWal
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nParam
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: azParam
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_free_filename'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_create_function'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zFunctionName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nArg
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: eTextRep
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pApp
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: xFunc
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xFuncDef
+                nullable: false
+                pointer: false
+      - name: xStep
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xStepDef
+                nullable: false
+                pointer: false
+      - name: xFinal
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xFinalDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_create_function16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zFunctionName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nArg
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: eTextRep
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pApp
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: xFunc
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xStepDef
+                nullable: false
+                pointer: false
+      - name: xStep
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xStepDef
+                nullable: false
+                pointer: false
+      - name: xFinal
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xFinalDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_create_function_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zFunctionName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nArg
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: eTextRep
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pApp
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: xFunc
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xStepDef
+                nullable: false
+                pointer: false
+      - name: xStep
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xStepDef
+                nullable: false
+                pointer: false
+      - name: xFinal
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xFinalDef
+                nullable: false
+                pointer: false
+      - name: xDestroy
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xDestroyDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_create_window_function'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zFunctionName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nArg
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: eTextRep
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pApp
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: xStep
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xStepDef
+                nullable: false
+                pointer: false
+      - name: xFinal
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xFinalDef
+                nullable: false
+                pointer: false
+      - name: xValue
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xValueDef
+                nullable: false
+                pointer: false
+      - name: xInverse
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xInverseDef
+                nullable: false
+                pointer: false
+      - name: xDestroy
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xDestroyDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_create_module'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: p
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_module
+            nullable: false
+            pointer: false
+      - name: pClientData
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_create_module_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: p
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_module
+            nullable: false
+            pointer: false
+      - name: pClientData
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: xDestroy
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xDestroyDef
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_data_count'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_database_file_object'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: sqlite3_file
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_db_cacheflush'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_db_filename'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDbName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_db_handle'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: sqlite3
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_db_mutex'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: sqlite3_mutex
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_db_readonly'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDbName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_db_release_memory'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_db_status'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: op
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pCur
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: pHiwtr
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: resetFlg
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_declare_vtab'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSQL
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_deserialize'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSchema
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: pData
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Uint8
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: szDb
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: szBuf
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_drop_modules'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: azKeep
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_enable_load_extension'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: onoff
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_enable_shared_cache'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_errcode'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_extended_errcode'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_errmsg'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_errmsg16'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_errstr'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_exec'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: sql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: callback
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: callbackDef
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: errmsg
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_sql'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_expanded_sql'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      free: 'sqlite3_free' # must use sqlite3_free().
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_normalized_sql'
+    built: true # relied on built output
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_extended_result_codes'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: onoff
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_file_control'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDbName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: op
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_filename_database'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_filename_journal'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_filename_wal'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_finalize'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_malloc'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_malloc64'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_realloc'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_realloc64'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_free'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_msize'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_get_table'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: pazResult
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Pointer
+                url: dart:ffi
+                nullable: false
+                pointer: true
+                types:
+                  - symbol: Utf8
+                    url: package:ffi/ffi.dart
+                    nullable: false
+                    pointer: false
+      - name: pnRow
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: pnColumn
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: pzErrmsg
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_free_table'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: result
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_get_autocommit'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_get_auxdata'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_set_auxdata'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: typedefGen12
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen12Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_soft_heap_limit64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_hard_heap_limit64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_initialize'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+  - name: 'sqlite3_shutdown'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+  - name: 'sqlite3_os_init'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+  - name: 'sqlite3_os_end'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+  - name: 'sqlite3_interrupt'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_keyword_count'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+  - name: 'sqlite3_keyword_name'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+      - name: arg3
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_keyword_check'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg1
+  - name: 'sqlite3_last_insert_rowid'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_limit'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: id
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: newVal
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_load_extension'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zFile
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zProc
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: pzErrMsg
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_memory_used'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+  - name: 'sqlite3_memory_highwater'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: resetFlag
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_mutex_alloc'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: sqlite3_mutex
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_mutex_free'
+    returns:
+      symbol: Void
+      url: dart:ffi
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_mutex
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_mutex_enter'
+    returns:
+      symbol: Void
+      url: dart:ffi
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_mutex
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_mutex_try'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_mutex
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_mutex_leave'
+    returns:
+      symbol: Void
+      url: dart:ffi
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_mutex
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_mutex_held'
+    built: true # relied on built output
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_mutex
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_mutex_notheld'
+    built: true # relied on built output
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_mutex
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_next_stmt'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: sqlite3_stmt
+          nullable: false
+          pointer: false
+    arguments:
+      - name: pDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_open'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: filename
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_open16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: filename
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: 'package:ffi/ffi.dart'
+            nullable: false
+            pointer: false
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_open_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: filename
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3
+                nullable: false
+                pointer: false
+      - name: flags
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: zVfs
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_overload_function'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zFuncName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nArg
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_prepare'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nByte
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: zSql # length of the pointer zSql
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_stmt
+                nullable: false
+                pointer: false
+      - name: pzTail
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_prepare_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nByte
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: zSql # length of the pointer zSql
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_stmt
+                nullable: false
+                pointer: false
+      - name: pzTail
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_prepare_v3'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: nByte
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: zSql # length of the pointer zSql
+      - name: prepFlags
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_stmt
+                nullable: false
+                pointer: false
+      - name: pzTail
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_prepare16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: 'package:ffi/ffi.dart'
+            nullable: false
+            pointer: false
+      - name: nByte
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: zSql # length of the pointer zSql
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_stmt
+                nullable: false
+                pointer: false
+      - name: pzTail
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Void
+                url: dart:ffi
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_prepare16_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: 'package:ffi/ffi.dart'
+            nullable: false
+            pointer: false
+      - name: nByte
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: zSql # length of the pointer zSql
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_stmt
+                nullable: false
+                pointer: false
+      - name: pzTail
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Void
+                url: dart:ffi
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_prepare16_v3'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSql
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: 'package:ffi/ffi.dart'
+            nullable: false
+            pointer: false
+      - name: nByte
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: zSql # length of the pointer zSql
+      - name: prepFlags
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_stmt
+                nullable: false
+                pointer: false
+      - name: pzTail
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Void
+                url: dart:ffi
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_preupdate_hook'
+    built: true # relied on built output
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: xPreUpdate
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xPreUpdateDef
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_preupdate_old'
+    built: true # relied on built output
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_value
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_preupdate_count'
+    built: true # relied on built output
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_preupdate_depth'
+    built: true # relied on built output
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_preupdate_new'
+    built: true # relied on built output
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_value
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_preupdate_blobwrite'
+    built: true # relied on built output
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_trace'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: xTrace
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xTraceDef
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_profile'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: xProfile
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xProfileDef
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_progress_handler'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: typedefGen13
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen13Def
+                nullable: false
+                pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_randomness'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: P
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_release_memory'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_reset'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_reset_auto_extension'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+  - name: 'sqlite3_result_blob'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        blob: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # size of arg2
+      - name: typedefGen14
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen14Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_result_blob64'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        blob: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # size of arg2
+      - name: typedefGen15
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen15Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_result_double'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: double
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_result_error'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # length of the pointer arg2
+  - name: 'sqlite3_result_error16'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: 'package:ffi/ffi.dart'
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # length of the pointer arg2
+  - name: 'sqlite3_result_error_toobig'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_result_error_nomem'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_result_error_code'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_result_int'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_result_int64'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_result_null'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_result_text'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # length of the pointer arg2
+      - name: typedefGen16
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen16Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_result_text64'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        text: true
+        types:
+          - symbol: Uint8   # encoding is required to determine it is utf8 or utf16
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # length of the pointer arg2
+      - name: typedefGen17
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen17Def
+                nullable: false
+                pointer: false
+      - name: encoding
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_result_text16'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: 'package:ffi/ffi.dart'
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+        sizeOf: arg2 # length of the pointer arg2
+      - name: typedefGen18
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen18Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_result_text16le'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: typedefGen19
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen19Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_result_text16be'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        override: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: typedefGen20
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen20Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_result_value'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_result_pointer'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: typedefGen21
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        destroyer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen21Def
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_result_zeroblob'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: n
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_result_zeroblob64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: n
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_result_subtype'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_serialize'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: true
+      types:
+        - symbol: Uint8
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSchema
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: piSize
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Int64
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: mFlags
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_set_authorizer'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: xAuth
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xAuthDef
+                nullable: false
+                pointer: false
+      - name: pUserData
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_set_last_insert_rowid'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_sleep'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_snapshot_cmp'
+    built: true # relied on built output with SQLITE_ENABLE_SNAPSHOT
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: p1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_snapshot
+            nullable: false
+            pointer: false
+      - name: p2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_snapshot
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_snapshot_free'
+    built: true # relied on built output with SQLITE_ENABLE_SNAPSHOT
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_snapshot
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_snapshot_get'
+    built: true # relied on built output with SQLITE_ENABLE_SNAPSHOT
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSchema
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: ppSnapshot
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: sqlite3_snapshot
+                nullable: false
+                pointer: false
+  - name: 'sqlite3_snapshot_open'
+    built: true # relied on built output with SQLITE_ENABLE_SNAPSHOT
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSchema
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: pSnapshot
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_snapshot
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_snapshot_recover'
+    built: true # relied on built output with SQLITE_ENABLE_SNAPSHOT
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_status'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: op
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pCurrent
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: pHighwater
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: resetFlag
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_status64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: op
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pCurrent
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int64
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: pHighwater
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Int64
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: resetFlag
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_step'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_stmt_busy'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_stmt_isexplain'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_stmt_readonly'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_stmt_scanstatus'
+    built: true # relied on built output with SQLITE_ENABLE_STMT_SCANSTATUS
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: pStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: idx
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: iScanStatusOp
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pOut
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_stmt_scanstatus_reset'
+    built: true # relied on built output with SQLITE_ENABLE_STMT_SCANSTATUS
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_stmt_status'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppStmt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_stmt
+            nullable: false
+            pointer: false
+      - name: op
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: resetFlg
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_strglob'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: zGlob
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zStr
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_stricmp'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_strnicmp'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_strlike'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: zGlob
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zStr
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: cEsc
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_system_errno'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_table_column_metadata'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDbName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zTableName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zColumnName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: pzDataType
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+      - name: pzCollSeq
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Pointer
+            url: dart:ffi
+            nullable: false
+            pointer: true
+            types:
+              - symbol: Utf8
+                url: package:ffi/ffi.dart
+                nullable: false
+                pointer: false
+      - name: pNotNull
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: pPrimaryKey
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: pAutoinc
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_threadsafe'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+  - name: 'sqlite3_total_changes'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_trace_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: xCallback
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xCallbackDef
+                nullable: false
+                pointer: false
+      - name: pCtx
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_txn_state'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zSchema
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_unlock_notify'
+    built: true # relied on built output with SQLITE_ENABLE_UNLOCK_NOTIFY
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: pBlocked
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: xNotify
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: xNotifyDef
+                nullable: false
+                pointer: false
+      - name: pNotifyArg
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_update_hook'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: typedefGen22
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen22Def
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_uri_parameter'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: zFilename
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zParam
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_uri_boolean'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: zFile
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: zParam
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: bDefault
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_uri_int64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: arg3
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_uri_key'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: zFilename
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_user_data'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_blob'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      blob: true
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_double'
+    returns:
+      symbol: double
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_int'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_int64'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_pointer'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_text'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_text16'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: true
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_text16le'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: false
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_text16be'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      override: false
+      free: false # the string is managed by SQLite
+      types:
+        - symbol: Utf16
+          url: 'package:ffi/ffi.dart'
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_bytes'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_bytes16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_type'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_numeric_type'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_nochange'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_frombind'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_dup'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: sqlite3_value
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_free'
+    returns:
+      symbol: void
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_value_subtype'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_value
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_vfs_find'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: true
+      pointer: true
+      types:
+        - symbol: sqlite3_vfs
+          nullable: false
+          pointer: false
+    arguments:
+      - name: zVfsName
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_vfs_register'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_vfs
+            nullable: false
+            pointer: false
+      - name: makeDflt
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_vfs_unregister'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_vfs
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_vtab_collation'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Utf8
+          url: package:ffi/ffi.dart
+          nullable: false
+          pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_index_info
+            nullable: false
+            pointer: false
+      - name: arg2
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_vtab_nochange'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3_context
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_vtab_on_conflict'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_wal_autocheckpoint'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: N
+        symbol: int
+        nullable: false
+        pointer: false
+  - name: 'sqlite3_wal_checkpoint'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_wal_checkpoint_v2'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: db
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: zDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+      - name: eMode
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: pnLog
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+      - name: pnCkpt
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Int32
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_wal_hook'
+    returns:
+      symbol: Pointer
+      url: dart:ffi
+      nullable: false
+      pointer: true
+      types:
+        - symbol: Void
+          url: dart:ffi
+          nullable: false
+          pointer: false
+    arguments:
+      - name: ppDb
+        symbol: Pointer
+        url: dart:ffi
+        nullable: false
+        pointer: true
+        types:
+          - symbol: sqlite3
+            nullable: false
+            pointer: false
+      - name: typedefGen23
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: NativeFunction
+            url: dart:ffi
+            nullable: false
+            pointer: false
+            types:
+              - symbol: typedefGen23Def
+                nullable: false
+                pointer: false
+      - name: arg1
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_win32_set_directory'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: zValue
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Void
+            url: dart:ffi
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_win32_set_directory8'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: zValue
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        types:
+          - symbol: Utf8
+            url: package:ffi/ffi.dart
+            nullable: false
+            pointer: false
+  - name: 'sqlite3_win32_set_directory16'
+    returns:
+      symbol: int
+      nullable: false
+      pointer: false
+    arguments:
+      - name: arg1
+        symbol: int
+        nullable: false
+        pointer: false
+      - name: zValue
+        symbol: Pointer
+        url: dart:ffi
+        nullable: true
+        pointer: true
+        override: true
+        types:
+          - symbol: Utf16
+            url: 'package:ffi/ffi.dart'
+            nullable: false
+            pointer: false
+# release version history
+releases:
+  - version: '3.0.0 alpha'
+    versionNumber: 3000000
+    releaseDate: 2004-06-18
+  - version: '3.0.1 alpha'
+    versionNumber: 3000001
+    releaseDate: 2004-06-22
+  - version: '3.0.2 beta'
+    versionNumber: 3000002
+    releaseDate: 2004-06-30
+  - version: '3.0.3 beta'
+    versionNumber: 3000003
+    releaseDate: 2004-07-22
+  - version: '3.0.4 beta'
+    versionNumber: 3000004
+    releaseDate: 2004-08-09
+  - version: '3.0.5 beta'
+    versionNumber: 3000005
+    releaseDate: 2004-08-29
+    changes:
+      - name: sqlite3_bind_parameter_name
+        kind: 0 # added
+  - version: '3.0.6 beta'
+    versionNumber: 3000006
+    releaseDate: 2004-09-02
+  - version: '3.0.7'
+    versionNumber: 3000007
+    releaseDate: 2004-09-18
+  - version: '3.0.8'
+    versionNumber: 3000008
+    releaseDate: 2004-10-12
+  - version: '3.1.0 ALPHA'
+    versionNumber: 3001000
+    releaseDate: 2005-01-21
+  - version: '3.1.1 BETA'
+    versionNumber: 3001001
+    releaseDate: 2005-02-01
+  - version: '3.1.2'
+    versionNumber: 3001002
+    releaseDate: 2005-02-15
+  - version: '3.1.3'
+    versionNumber: 3001003
+    releaseDate: 2005-02-19
+  - version: '3.1.4'
+    versionNumber: 3001004
+    releaseDate: 2005-03-11
+  - version: '3.1.5'
+    versionNumber: 3001005
+    releaseDate: 2005-03-11
+  - version: '3.1.6'
+    versionNumber: 3001006
+    releaseDate: 2005-03-17
+  - version: '3.2.0'
+    versionNumber: 3002000
+    releaseDate: 2005-03-21
+  - version: '3.2.1'
+    versionNumber: 3002001
+    releaseDate: 2005-03-29
+  - version: '3.2.2'
+    versionNumber: 3002002
+    releaseDate: 2005-06-12
+    changes:
+      - name: sqlite3_db_handle
+        kind: 0 # added
+      - name: sqlite3_get_autocommit
+        kind: 0 # added
+  - version: '3.2.3'
+    versionNumber: 3002003
+    releaseDate: 2005-08-21
+  - version: '3.2.4'
+    versionNumber: 3002004
+    releaseDate: 2005-08-24
+  - version: '3.2.5'
+    versionNumber: 3002005
+    releaseDate: 2005-08-27
+  - version: '3.2.6'
+    versionNumber: 3002006
+    releaseDate: 2005-09-17
+  - version: '3.2.7'
+    versionNumber: 3002007
+    releaseDate: 2005-09-24
+  - version: '3.2.8'
+    versionNumber: 3002008
+    releaseDate: 2005-12-19
+  - version: '3.3.0 alpha'
+    versionNumber: 3003000
+    releaseDate: 2006-01-11
+  - version: '3.3.1 alpha'
+    versionNumber: 3003001
+    releaseDate: 2006-01-16
+  - version: '3.3.2 beta'
+    versionNumber: 3003002
+    releaseDate: 2006-01-24
+  - version: '3.3.3'
+    versionNumber: 3003003
+    releaseDate: 2006-01-31
+  - version: '3.3.4'
+    versionNumber: 3003004
+    releaseDate: 2006-02-11
+  - version: '3.3.5'
+    versionNumber: 3003005
+    releaseDate: 2006-04-05
+  - version: '3.3.6'
+    versionNumber: 3003006
+    releaseDate: 2006-06-06
+  - version: '3.3.7'
+    versionNumber: 3003007
+    releaseDate: 2006-08-12
+  - version: '3.3.8'
+    versionNumber: 3003008
+    releaseDate: 2006-10-09
+    changes:
+      - name: sqlite3_auto_extension
+        kind: 0 # added
+  - version: '3.3.9'
+    versionNumber: 3003009
+    releaseDate: 2007-01-04
+    changes:
+      - name: sqlite3_prepare_v2
+        kind: 0 # added
+      - name: sqlite3_prepare16_v2
+        kind: 0 # added
+  - version: '3.3.10'
+    versionNumber: 3003010
+    releaseDate: 2007-01-09
+  - version: '3.3.11'
+    versionNumber: 3003011
+    releaseDate: 2007-01-22
+  - version: '3.3.12'
+    versionNumber: 3003012
+    releaseDate: 2007-01-27
+  - version: '3.3.13'
+    versionNumber: 3003013
+    releaseDate: 2007-02-13
+  - version: '3.3.14'
+    versionNumber: 3003014
+    releaseDate: 2007-04-02
+  - version: '3.3.15'
+    versionNumber: 3003015
+    releaseDate: 2007-04-09
+  - version: '3.3.16'
+    versionNumber: 3003016
+    releaseDate: 2007-04-18
+  - version: '3.3.17'
+    versionNumber: 3003017
+    releaseDate: 2007-04-25
+  - version: '3.4.0'
+    versionNumber: 3004000
+    releaseDate: 2007-06-18
+    changes:
+      - name: sqlite3_bind_zeroblob
+        kind: 0 # added
+      - name: sqlite3_blob_open
+        kind: 0 # added
+      - name: sqlite3_create_collation_v2
+        kind: 0 # added
+  - version: '3.4.1'
+    versionNumber: 3004001
+    releaseDate: 2007-07-20
+    changes:
+      - name: sqlite3_create_module_v2
+        kind: 0 # added
+  - version: '3.4.2'
+    versionNumber: 3004002
+    releaseDate: 2007-08-13
+  - version: '3.5.0'
+    versionNumber: 3005000
+    releaseDate: 2007-09-04
+    changes:
+      - name: sqlite3_open_v2
+        kind: 0 # added
+  - version: '3.5.1'
+    versionNumber: 3005001
+    releaseDate: 2007-10-04
+  - version: '3.5.2'
+    versionNumber: 3005002
+    releaseDate: 2007-11-05
+  - version: '3.5.3'
+    versionNumber: 3005003
+    releaseDate: 2007-11-27
+  - version: '3.5.4'
+    versionNumber: 3005004
+    releaseDate: 2007-12-14
+  - version: '3.5.5'
+    versionNumber: 3005005
+    releaseDate: 2008-01-31
+  - version: '3.5.6'
+    versionNumber: 3005006
+    releaseDate: 2008-02-06
+    changes:
+      - name: sqlite3_result_error_code
+        kind: 0 # added
+  - version: '3.5.7'
+    versionNumber: 3005007
+    releaseDate: 2008-03-17
+  - version: '3.5.8'
+    versionNumber: 3005008
+    releaseDate: 2008-04-16
+    changes:
+      - name: sqlite3_context_db_handle
+        kind: 0 # added
+      - name: sqlite3_limit
+        kind: 0 # added
+  - version: '3.5.9'
+    versionNumber: 3005009
+    releaseDate: 2008-05-14
+  - version: '3.6.0 beta'
+    versionNumber: 3006000
+    releaseDate: 2008-07-16
+    changes:
+      - name: sqlite3_config
+        kind: 0 # added
+      - name: sqlite3_status
+        kind: 0 # added
+      - name: sqlite3_initialize
+        kind: 0 # added
+      - name: sqlite3_shutdown
+        kind: 0 # added
+      - name: sqlite3_next_stmt
+        kind: 0 # added
+  - version: '3.6.1'
+    versionNumber: 3006001
+    releaseDate: 2008-08-06
+    changes:
+      - name: sqlite3_db_config
+        kind: 0 # added
+      - name: sqlite3_db_status
+        kind: 0 # added
+  - version: '3.6.2'
+    versionNumber: 3006002
+    releaseDate: 2008-08-30
+  - version: '3.6.3'
+    versionNumber: 3006003
+    releaseDate: 2008-09-22
+  - version: '3.6.4'
+    versionNumber: 3006004
+    releaseDate: 2008-10-15
+    changes:
+      - name: sqlite3_stmt_status
+        kind: 0 # added
+  - version: '3.6.5'
+    versionNumber: 3006005
+    releaseDate: 2008-11-12
+    changes:
+      - name: sqlite3_db_mutex
+        kind: 0 # added
+      - name: sqlite3_extended_errcode
+        kind: 0 # added
+  - version: '3.6.6'
+    versionNumber: 3006006
+    releaseDate: 2008-11-19
+  - version: '3.6.6.1'
+    versionNumber: 3006006
+    releaseDate: 2008-11-22
+  - version: '3.6.6.2'
+    versionNumber: 3006006
+    releaseDate: 2008-11-26
+  - version: '3.6.7'
+    versionNumber: 3006007
+    releaseDate: 2008-12-16
+  - version: '3.6.8'
+    versionNumber: 3006008
+    releaseDate: 2009-01-12
+  - version: '3.6.9'
+    versionNumber: 3006009
+    releaseDate: 2009-01-14
+  - version: '3.6.10'
+    versionNumber: 3006010
+    releaseDate: 2009-01-15
+  - version: '3.6.11'
+    versionNumber: 3006011
+    releaseDate: 2009-02-18
+  - version: '3.6.12'
+    versionNumber: 3006012
+    releaseDate: 2009-03-31
+    changes:
+      - name: sqlite3_unlock_notify
+        kind: 0 # added
+  - version: '3.6.13'
+    versionNumber: 3006013
+    releaseDate: 2009-04-13
+  - version: '3.6.14'
+    versionNumber: 3006014
+    releaseDate: 2009-05-07
+  - version: '3.6.14.1'
+    versionNumber: 3006014
+    releaseDate: 2009-05-19
+  - version: '3.6.14.2'
+    versionNumber: 3006014
+    releaseDate: 2009-05-25
+  - version: '3.6.15'
+    versionNumber: 3006015
+    releaseDate: 2009-06-15
+  - version: '3.6.16'
+    versionNumber: 3006016
+    releaseDate: 2009-06-27
+  - version: '3.6.17'
+    versionNumber: 3006017
+    releaseDate: 2009-08-10
+  - version: '3.6.18'
+    versionNumber: 3006018
+    releaseDate: 2009-09-11
+  - version: '3.6.19'
+    versionNumber: 3006019
+    releaseDate: 2009-10-14
+  - version: '3.6.16.1'
+    versionNumber: 3006016
+    releaseDate: 2009-10-30
+  - version: '3.6.20'
+    versionNumber: 3006020
+    releaseDate: 2009-11-04
+  - version: '3.6.21'
+    versionNumber: 3006021
+    releaseDate: 2009-12-07
+  - version: '3.6.22'
+    versionNumber: 3006022
+    releaseDate: 2010-01-06
+  - version: '3.6.23'
+    versionNumber: 3006023
+    releaseDate: 2010-03-09
+    changes:
+      - name: sqlite3_compileoption_used
+        kind: 0 # added
+      - name: sqlite3_compileoption_get
+        kind: 0 # added
+      - name: sqlite3_log
+        kind: 0 # added
+  - version: '3.6.23.1'
+    versionNumber: 3006023
+    releaseDate: 2010-03-26
+  - version: '3.7.0'
+    versionNumber: 3007000
+    releaseDate: 2010-07-21
+  - version: '3.7.0.1'
+    versionNumber: 3007000
+    releaseDate: 2010-08-04
+  - version: '3.7.1'
+    versionNumber: 3007001
+    releaseDate: 2010-08-23
+  - version: '3.7.2'
+    versionNumber: 3007002
+    releaseDate: 2010-08-24
+  - version: '3.7.3'
+    versionNumber: 3007003
+    releaseDate: 2010-10-08
+    changes:
+      - name: sqlite3_create_function_v2
+        kind: 0 # added
+      - name: sqlite3_soft_heap_limit64
+        kind: 0 # added
+      - name: sqlite3_soft_heap_limit
+        kind: 2 # deprecated
+  - version: '3.7.4'
+    versionNumber: 3007004
+    releaseDate: 2010-12-07
+    changes:
+      - name: sqlite3_blob_reopen
+        kind: 0 # added
+      - name: sqlite3_stmt_readonly
+        kind: 0 # added
+  - version: '3.7.5'
+    versionNumber: 3007005
+    releaseDate: 2011-02-01
+    changes:
+      - name: sqlite3_vsnprintf
+        kind: 0 # added
+  - version: '3.7.6'
+    versionNumber: 3007006
+    releaseDate: 2011-04-12
+    changes:
+      - name: sqlite3_wal_checkpoint_v2
+        kind: 0 # added
+  - version: '3.7.6.1'
+    versionNumber: 3007006
+    releaseDate: 2011-04-13
+  - version: '3.7.6.2'
+    versionNumber: 3007006
+    releaseDate: 2011-04-17
+  - version: '3.7.6.3'
+    versionNumber: 3007006
+    releaseDate: 2011-05-19
+  - version: '3.7.7'
+    versionNumber: 3007007
+    releaseDate: 2011-06-23
+    changes:
+      - name: sqlite3_vtab_config
+        kind: 0 # added
+  - version: '3.7.7.1'
+    versionNumber: 3007007
+    releaseDate: 2011-06-28
+  - version: '3.7.8'
+    versionNumber: 3007008
+    releaseDate: 2011-09-19
+  - version: '3.7.9'
+    versionNumber: 3007009
+    releaseDate: 2011-11-01
+  - version: '3.7.10'
+    versionNumber: 3007010
+    releaseDate: 2012-01-16
+    changes:
+      - name: sqlite3_db_release_memory
+        kind: 0 # added
+      - name: sqlite3_db_filename
+        kind: 0 # added
+      - name: sqlite3_stmt_busy
+        kind: 0 # added
+      - name: sqlite3_uri_boolean
+        kind: 0 # added
+      - name: sqlite3_uri_int64
+        kind: 0 # added
+  - version: '3.7.11'
+    versionNumber: 3007011
+    releaseDate: 2012-03-20
+    changes:
+      - name: sqlite3_stricmp
+        kind: 0 # added
+      - name: sqlite3_db_readonly
+        kind: 0 # added
+  - version: '3.7.12'
+    versionNumber: 3007012
+    releaseDate: 2012-05-14
+  - version: '3.7.12.1'
+    versionNumber: 3007012
+    releaseDate: 2012-05-22
+  - version: '3.7.13'
+    versionNumber: 3007013
+    releaseDate: 2012-06-11
+  - version: '3.7.14'
+    versionNumber: 3007014
+    releaseDate: 2012-09-03
+    changes:
+      - name: sqlite3_close_v2
+        kind: 0 # added
+  - version: '3.7.14.1'
+    versionNumber: 3007014
+    releaseDate: 2012-10-04
+  - version: '3.7.15'
+    versionNumber: 3007015
+    releaseDate: 2012-12-12
+    changes:
+      - name: sqlite3_errstr
+        kind: 0 # added
+  - version: '3.7.15.1'
+    versionNumber: 3007015
+    releaseDate: 2012-12-19
+  - version: '3.7.15.2'
+    versionNumber: 3007015
+    releaseDate: 2013-01-09
+  - version: '3.7.16'
+    versionNumber: 3007016
+    releaseDate: 2013-03-18
+  - version: '3.7.16.1'
+    versionNumber: 3007016
+    releaseDate: 2013-03-29
+  - version: '3.7.16.2'
+    versionNumber: 3007016
+    releaseDate: 2013-04-12
+  - version: '3.7.17'
+    versionNumber: 3007017
+    releaseDate: 2013-05-20
+    changes:
+      - name: sqlite3_strglob
+        kind: 0 # added
+  - version: '3.8.0'
+    versionNumber: 3008000
+    releaseDate: 2013-08-26
+    changes:
+      - name: sqlite3_cancel_auto_extension
+        kind: 0 # added
+  - version: '3.8.0.1'
+    versionNumber: 3008000
+    releaseDate: 2013-08-29
+  - version: '3.8.0.2'
+    versionNumber: 3008000
+    releaseDate: 2013-09-03
+  - version: '3.8.1'
+    versionNumber: 3008001
+    releaseDate: 2013-10-17
+  - version: '3.8.2'
+    versionNumber: 3008002
+    releaseDate: 2013-12-06
+  - version: '3.8.3'
+    versionNumber: 3008003
+    releaseDate: 2014-02-03
+  - version: '3.8.3.1'
+    versionNumber: 3008003
+    releaseDate: 2014-02-11
+  - version: '3.8.4'
+    versionNumber: 3008004
+    releaseDate: 2014-03-10
+  - version: '3.8.4.1'
+    versionNumber: 3008004
+    releaseDate: 2014-03-11
+  - version: '3.8.4.2'
+    versionNumber: 3008004
+    releaseDate: 2014-03-26
+  - version: '3.8.4.3'
+    versionNumber: 3008004
+    releaseDate: 2014-04-03
+  - version: '3.8.5'
+    versionNumber: 3008005
+    releaseDate: 2014-06-04
+    changes:
+      - name: sqlite3_rtree_query_callback
+        kind: 0 # added
+  - version: '3.8.6'
+    versionNumber: 3008006
+    releaseDate: 2014-08-15
+  - version: '3.8.7'
+    versionNumber: 3008007
+    releaseDate: 2014-10-17
+    changes:
+      - name: sqlite3_malloc64
+        kind: 0 # added
+      - name: sqlite3_realloc64
+        kind: 0 # added
+      - name: sqlite3_bind_blob64
+        kind: 0 # added
+      - name: sqlite3_result_blob64
+        kind: 0 # added
+      - name: sqlite3_bind_text64
+        kind: 0 # added
+      - name: sqlite3_result_text64
+        kind: 0 # added
+      - name: sqlite3_msize
+        kind: 0 # added
+      # extension specific more information visit https://www.sqlite.org/src/doc/trunk/ext/userauth/user-auth.txt
+      - category: 0
+        name: sqlite3_user_authenticate
+        kind: 0 # added
+      - category: 0
+        kind: 0 # added
+        name: sqlite3_user_add
+      - category: 0
+        name: sqlite3_user_change
+        kind: 0 # added
+      - category: 0
+        name: sqlite3_user_delete
+        kind: 0 # added
+  - version: '3.8.7.1'
+    versionNumber: 3008007
+    releaseDate: 2014-10-29
+  - version: '3.8.7.2'
+    versionNumber: 3008007
+    releaseDate: 2014-11-18
+  - version: '3.8.7.3'
+    versionNumber: 3008007
+    releaseDate: 2014-12-05
+  - version: '3.8.7.4'
+    versionNumber: 3008007
+    releaseDate: 2014-12-09
+  - version: '3.8.8'
+    versionNumber: 3008008
+    releaseDate: 2015-01-16
+    changes:
+      - name: sqlite3_stmt_scanstatus
+        kind: 0 # added
+  - version: '3.8.8.1'
+    versionNumber: 3008008
+    releaseDate: 2015-01-20
+  - version: '3.8.8.2'
+    versionNumber: 3008008
+    releaseDate: 2015-01-30
+  - version: '3.8.8.3'
+    versionNumber: 3008008
+    releaseDate: 2015-02-25
+  - version: '3.8.9'
+    versionNumber: 3008009
+    releaseDate: 2015-04-08
+    changes:
+      - name: sqlite3_status64
+        kind: 0 # added
+  - version: '3.8.10'
+    versionNumber: 3008010
+    releaseDate: 2015-05-07
+  - version: '3.8.10.1'
+    versionNumber: 3008010
+    releaseDate: 2015-05-09
+  - version: '3.8.10.2'
+    versionNumber: 3008010
+    releaseDate: 2015-05-20
+  - version: '3.8.11'
+    versionNumber: 3008011
+    releaseDate: 2015-07-27
+    changes:
+      - name: sqlite3_value_dup
+        kind: 0 # added
+      - name: sqlite3_value_free
+        kind: 0 # added
+      - name: sqlite3_result_zeroblob64
+        kind: 0 # added
+      - name: sqlite3_bind_zeroblob64
+        kind: 0 # added
+  - version: '3.8.11.1'
+    versionNumber: 3008011
+    releaseDate: 2015-07-29
+  - version: '3.9.0'
+    versionNumber: 3009000
+    releaseDate: 2015-10-14
+    changes:
+      - name: sqlite3_value_subtype
+        kind: 0 # added
+      - name: sqlite3_result_subtype
+        kind: 0 # added
+      - name: sqlite3_memory_alarm
+        kind: 2 # deprecate
+  - version: '3.9.1'
+    versionNumber: 3009001
+    releaseDate: 2015-10-16
+  - version: '3.9.2'
+    versionNumber: 3009002
+    releaseDate: 2015-11-02
+  - version: '3.10.0'
+    versionNumber: 3010000
+    releaseDate: 2016-01-06
+    changes:
+      - name: sqlite3_db_cacheflush
+        kind: 0 # added
+      - name: sqlite3_strlike
+        kind: 0 # added
+      - name: sqlite3_snapshot_get
+        kind: 0 # added
+      - name: sqlite3_snapshot_open
+        kind: 0 # added
+      - name: sqlite3_snapshot_free
+        kind: 0 # added
+  - version: '3.10.1'
+    versionNumber: 3010001
+    releaseDate: 2016-01-14
+  - version: '3.10.2'
+    versionNumber: 3010002
+    releaseDate: 2016-01-20
+  - version: '3.11.0'
+    versionNumber: 3011000
+    releaseDate: 2016-02-15
+  - version: '3.11.1'
+    versionNumber: 3011001
+    releaseDate: 2016-03-03
+  - version: '3.12.0'
+    versionNumber: 3012000
+    releaseDate: 2016-03-29
+    changes:
+      - name: sqlite3_system_errno
+        kind: 0 # added
+  - version: '3.9.3'
+    versionNumber: 3009003
+    releaseDate: 2016-04-01
+  - version: '3.12.1'
+    versionNumber: 3012001
+    releaseDate: 2016-04-08
+  - version: '3.12.2'
+    versionNumber: 3012002
+    releaseDate: 2016-04-18
+  - version: '3.13.0'
+    versionNumber: 3013000
+    releaseDate: 2016-05-18
+  - version: '3.14'
+    versionNumber: 3014000
+    releaseDate: 2016-08-08
+    changes:
+      - name: sqlite3_expanded_sql
+        kind: 0 # added
+      - name: sqlite3_trace_v2
+        kind: 0 # added
+      - name: sqlite3_trace
+        kind: 2 # deprecated
+      - name: sqlite3_profile
+        kind: 2 # deprecated
+  - version: '3.14.1'
+    versionNumber: 3014001
+    releaseDate: 2016-08-11
+  - version: '3.14.2'
+    versionNumber: 3014002
+    releaseDate: 2016-09-12
+  - version: '3.15.0'
+    versionNumber: 3015000
+    releaseDate: 2016-10-14
+  - version: '3.15.1'
+    versionNumber: 3015001
+    releaseDate: 2016-11-04
+  - version: '3.15.2'
+    versionNumber: 3015002
+    releaseDate: 2016-11-28
+  - version: '3.16.0'
+    versionNumber: 3016000
+    releaseDate: 2017-01-02
+  - version: '3.16.1'
+    versionNumber: 3016001
+    releaseDate: 2017-01-03
+  - version: '3.16.2'
+    versionNumber: 3016002
+    releaseDate: 2017-01-06
+  - version: '3.17.0'
+    versionNumber: 3017000
+    releaseDate: 2017-02-13
+  - version: '3.18.0'
+    versionNumber: 3018000
+    releaseDate: 2017-03-30
+    changes:
+      - name: sqlite3_set_last_insert_rowid
+        kind: 0 # added
+  - version: '3.19.0'
+    versionNumber: 3019000
+    releaseDate: 2017-05-22
+  - version: '3.19.1'
+    versionNumber: 3019001
+    releaseDate: 2017-05-24
+  - version: '3.19.2'
+    versionNumber: 3019002
+    releaseDate: 2017-05-25
+  - version: '3.19.3'
+    versionNumber: 3019003
+    releaseDate: 2017-06-08
+  - version: '3.18.1'
+    versionNumber: 3018001
+    releaseDate: 2017-06-16
+  - version: '3.18.2'
+    versionNumber: 3018002
+    releaseDate: 2017-06-17
+  - version: '3.20.0'
+    versionNumber: 3020000
+    releaseDate: 2017-08-01
+    changes:
+      - name: sqlite3_prepare_v3
+        kind: 0 # added
+      - name: sqlite3_prepare16_v3
+        kind: 0 # added
+      - name: sqlite3_bind_pointer
+        kind: 0 # added
+      - name: sqlite3_result_pointer
+        kind: 0 # added
+      - name: sqlite3_value_pointer
+        kind: 0 # added
+  - version: '3.20.1'
+    versionNumber: 3020001
+    releaseDate: 2017-08-24
+  - version: '3.21.0'
+    versionNumber: 3021000
+    releaseDate: 2017-10-24
+  - version: '3.22.0'
+    versionNumber: 3022000
+    releaseDate: 2018-01-22
+    changes:
+      - name: sqlite3_vtab_nochange
+        kind: 0 # added
+      - name: sqlite3_value_nochange
+        kind: 0 # added
+      - name: sqlite3_vtab_collation
+        kind: 0 # added
+  - version: '3.23.0'
+    versionNumber: 3023000
+    releaseDate: 2018-04-02
+    changes:
+      - name: sqlite3_serialize
+        kind: 0 # added
+      - name: sqlite3_deserialize
+        kind: 0 # added
+  - version: '3.23.1'
+    versionNumber: 3023001
+    releaseDate: 2018-04-10
+  - version: '3.24.0'
+    versionNumber: 3024000
+    releaseDate: 2018-06-04
+    changes:
+      - name: sqlite3_keyword_count
+        kind: 0 # added
+      - name: sqlite3_keyword_name
+        kind: 0 # added
+      - name: sqlite3_keyword_check
+        kind: 0 # added
+  - version: '3.25.0'
+    versionNumber: 3025000
+    releaseDate: 2018-09-15
+  - version: '3.25.1'
+    versionNumber: 3025001
+    releaseDate: 2018-09-18
+  - version: '3.25.2'
+    versionNumber: 3025002
+    releaseDate: 2018-09-25
+  - version: '3.25.3'
+    versionNumber: 3025003
+    releaseDate: 2018-11-05
+  - version: '3.26.0'
+    versionNumber: 3026000
+    releaseDate: 2018-12-01
+    changes:
+      - name: sqlite3_normalized_sql
+        kind: 0 # added
+  - version: '3.27.0'
+    versionNumber: 3027000
+    releaseDate: 2019-02-07
+  - version: '3.27.1'
+    versionNumber: 3027001
+    releaseDate: 2019-02-08
+  - version: '3.27.2'
+    versionNumber: 3027002
+    releaseDate: 2019-02-25
+  - version: '3.28.0'
+    versionNumber: 3028000
+    releaseDate: 2019-04-16
+    changes:
+      - name: sqlite3_stmt_isexplain
+        kind: 0 # added
+      - name: sqlite3_value_frombind
+        kind: 0 # added
+  - version: '3.29.0'
+    versionNumber: 3029000
+    releaseDate: 2019-07-10
+  - version: '3.30.0'
+    versionNumber: 3030000
+    releaseDate: 2019-10-04
+    changes:
+      - name: sqlite3_drop_modules
+        kind: 0 # added
+  - version: '3.30.1'
+    versionNumber: 3030001
+    releaseDate: 2019-10-10
+  - version: '3.31.0'
+    versionNumber: 3031000
+    releaseDate: 2020-01-22
+    changes:
+      - name: sqlite3_hard_heap_limit64
+        kind: 0 # added
+      - name: sqlite3_filename_database
+        kind: 0 # added
+      - name: sqlite3_filename_journal
+        kind: 0 # added
+      - name: sqlite3_filename_wal
+        kind: 0 # added
+      - name: sqlite3_uri_key
+        kind: 0 # added
+  - version: '3.31.1'
+    versionNumber: 3031001
+    releaseDate: 2020-01-27
+  - version: '3.32.0'
+    versionNumber: 3032000
+    releaseDate: 2020-05-22
+    changes:
+      - name: sqlite3_create_filename
+        kind: 0 # added
+      - name: sqlite3_free_filename
+        kind: 0 # added
+      - name: sqlite3_database_file_object
+        kind: 0 # added
+  - version: '3.32.1'
+    versionNumber: 3032001
+    releaseDate: 2020-05-25
+  - version: '3.32.2'
+    versionNumber: 3032002
+    releaseDate: 2020-06-04
+  - version: '3.32.3'
+    versionNumber: 3032003
+    releaseDate: 2020-06-18
+  - version: '3.33.0'
+    versionNumber: 3033000
+    releaseDate: 2020-08-14
+  - version: '3.34.0'
+    versionNumber: 3034000
+    releaseDate: 2020-12-01
+    changes:
+      - name: sqlite3_txn_state
+        kind: 0 # added
+  - version: '3.34.1'
+    versionNumber: 3034001
+    releaseDate: 2021-01-20
+  - version: '3.35.0'
+    versionNumber: 3035000
+    releaseDate: 2021-03-12
+  - version: '3.35.1'
+    versionNumber: 3035001
+    releaseDate: 2021-03-15
+  - version: '3.35.2'
+    versionNumber: 3035002
+    releaseDate: 2021-03-17
+  - version: '3.35.3'
+    versionNumber: 3035003
+    releaseDate: 2021-03-26
+  - version: '3.35.4'
+    versionNumber: 3035004
+    releaseDate: 2021-04-02
+  - version: '3.35.5'
+    versionNumber: 3035005
+    releaseDate: 2021-04-19
+  - version: '3.36.0'
+    versionNumber: 3036000
+    releaseDate: 2021-06-18
