@@ -24,6 +24,8 @@ WEBASSEMBLY_RELEASE = release.normal release.bigint
 # use for automatic test on all platform
 WEBASSEMBLY_CI = --configuration dart_test_ci.yaml
 
+requisition: webassembly-build-force sqlite
+
 webassembly-build-force:
 	dart run bin/dsqlite.dart -b -d --release 2021:3.36.00 -o ${WEBASSEMBLY_OUT}
 	dart run bin/dsqlite.dart -b -d --release 2017:3.17.00 -o ${WEBASSEMBLY_OUT}

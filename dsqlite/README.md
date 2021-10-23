@@ -125,3 +125,31 @@ emitBitInt: true # true to emit both none support to bigint and a support to big
 # asm:
 #   - '-s ALLOW_MEMORY_GROWTH=1'
 ```  
+
+# Testing
+
+Before running test, it required to download sqlite source code and build locally therefore you must
+has [emscripten](https://emscripten.org/) installed and necessary tools to build sqlite from source code.
+
+The test code expect a dynamic library location at:
+```shell script
+# Window platform
+sqlite/latest/sqlite3.dll
+# linux, this library is auto generate by sqlite3 source code make file.
+sqlite/latest/.libs/libsqlite3.so
+# macos, this library is auto generate by sqlite3 source code make file.
+sqlite/latest/.libs/libsqlite3.dylib
+```
+
+For Windows user, it's required to build sqlite3 library `sqlite3.dll` manually follow the documentation
+description [here](https://www.sqlite.org/howtocompile.html#building_a_windows_dll) at sqlite website.
+
+For user running platform otherwise Windows, use make to build and run the test. Windows user may use
+`powershell` or other other command line application to run makefile.
+```shell script
+make requisition
+# test both browser (debug webassembly only) and vm
+make dsqlite_test_local
+# full test for both browser (debug and release) and vm
+make dsqlite_test
+```
