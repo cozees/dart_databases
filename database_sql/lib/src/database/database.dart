@@ -29,7 +29,8 @@ abstract class Transaction {
   Future<Changes> exec(String sql, {Iterable<dynamic>? parameters});
 
   /// A wrapped method around statement to execute a statement select query
-  Future<Rows<T>> query<T>(String query, {Iterable<dynamic>? parameters, RowCreator<T>? creator});
+  Future<Rows<T>> query<T>(String query,
+      {Iterable<dynamic>? parameters, RowCreator<T>? creator});
 }
 
 /// provide ability to ensure the result from query api will be closed even when an exception occurred.
@@ -76,7 +77,8 @@ abstract class Database {
   /// Depend on database engine, when open a transaction, the api might block the execution until
   /// the transaction is available again. If the [timeout] is provided the api will throw an error
   /// timeout when waiting exceed the duration provide the [timeout].
-  Future<T> begin<T extends Transaction>({TransactionCreator<T>? creator, Duration? timeout});
+  Future<T> begin<T extends Transaction>(
+      {TransactionCreator<T>? creator, Duration? timeout});
 
   /// Returns a prepared statement for read or write.
   Future<Statement> prepare(String query, [dynamic option]);
@@ -85,7 +87,8 @@ abstract class Database {
   Future<Changes> exec(String sql, {Iterable<dynamic>? parameters});
 
   /// A wrapped method around statement to execute a statement select query
-  Future<Rows<T>> query<T>(String query, {Iterable<dynamic>? parameters, RowCreator<T>? creator});
+  Future<Rows<T>> query<T>(String query,
+      {Iterable<dynamic>? parameters, RowCreator<T>? creator});
 }
 
 /// provide ability to ensure the result from query api will be closed even when an exception occurred.

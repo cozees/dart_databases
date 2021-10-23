@@ -30,7 +30,8 @@ abstract class Statement {
 /// A statement use for SELECT query or query data in general
 abstract class ReadStatement implements Statement {
   /// Executes a query such as SELECT with or without parameter.
-  Future<Rows<T>> query<T>({Iterable<dynamic>? parameters, RowCreator<T>? creator});
+  Future<Rows<T>> query<T>(
+      {Iterable<dynamic>? parameters, RowCreator<T>? creator});
 }
 
 /// A statement use for write query such as INSERT, DELETE, UPDATE ...etc.

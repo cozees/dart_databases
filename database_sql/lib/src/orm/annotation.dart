@@ -16,7 +16,8 @@ String snakeCapitalCaseConversion(String name, [bool toSQL = true]) {
         // underscore _, first one is ignored
         if (i == 0) continue;
         buffer.writeCharCode(ucodes[i]);
-      } else if ((96 < ucodes[i] && ucodes[i] < 123) || (47 < ucodes[i] && ucodes[i] < 58)) {
+      } else if ((96 < ucodes[i] && ucodes[i] < 123) ||
+          (47 < ucodes[i] && ucodes[i] < 58)) {
         // a-z 0-9
         buffer.writeCharCode(ucodes[i]);
       } else if (64 < ucodes[i] && ucodes[i] < 91) {
@@ -61,18 +62,21 @@ class PredefinedDefaultValue {
       int start = 0, index = -1;
       while (segments.length < 4) {
         index = line.indexOf(',', start);
-        if (index == -1) throw Exception('Invalid pre-defined default value $line.');
+        if (index == -1)
+          throw Exception('Invalid pre-defined default value $line.');
         segments.add(line.substring(start, index));
         start = ++index;
       }
-      result.add(PredefinedDefaultValue(segments[0], segments[1], segments[2], segments[4]));
+      result.add(PredefinedDefaultValue(
+          segments[0], segments[1], segments[2], segments[4]));
       segments.clear();
     }
     return result;
   }
 
   /// create pre-defined value
-  const PredefinedDefaultValue(this.defined, this.dartValue, this.dartType, this.sqlType);
+  const PredefinedDefaultValue(
+      this.defined, this.dartValue, this.dartType, this.sqlType);
 
   /// the text that defined the default value
   final String defined;
@@ -348,4 +352,3 @@ class Column {
   /// ```
   final dynamic writer;
 }
-

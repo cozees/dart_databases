@@ -4,7 +4,8 @@ part of 'database.dart';
 typedef ArgumentConverter = dynamic Function(int index, ValueReader reader);
 
 /// Default argument converter, it use when there is not argument converter provided to function.
-dynamic defaultArgumentConverter(int index, ValueReader reader) => reader.valueAt(index);
+dynamic defaultArgumentConverter(int index, ValueReader reader) =>
+    reader.valueAt(index);
 
 /// A function to convert value return by dart function to a compatible data type.
 typedef FunctionResultConverter<T> = dynamic Function(T);

@@ -42,7 +42,8 @@ Database open(String driverName, Object dataSource) =>
     _ensureDriverAvailability(driverName).open(dataSource);
 
 /// Open a connection to the database and automatically close it when the [block] callback execution done.
-Future<void> protect(String driverName, Object dataSource, {required Future<void> Function(Database) block}) async {
+Future<void> protect(String driverName, Object dataSource,
+    {required Future<void> Function(Database) block}) async {
   final db = open(driverName, dataSource);
   try {
     await block(db);
