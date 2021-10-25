@@ -52,6 +52,7 @@ final sourceDir = ['build', 'sqlite'].join(Platform.pathSeparator);
 Future<void> downloadSource(String year, String dversion, String version, [String? verify]) async {
   final url = Uri.parse('https://sqlite.org/$year/sqlite-amalgamation-$dversion.zip');
   final cacheFile = File(sourceFile);
+  if (!cacheFile.existsSync()) cacheFile.createSync(recursive: true);
   final response = await (await HttpClient().getUrl(url)).close();
   if (response.statusCode != 200) {
     print(red.write('Unable to download sqlite $url.').toString());

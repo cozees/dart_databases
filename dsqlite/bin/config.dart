@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:package_config/package_config.dart';
+import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:yaml/yaml.dart' as yaml;
 
 import 'util.dart';
@@ -47,43 +49,65 @@ class ConfigItem {
   final List<String> flags;
 }
 
+extension on Directory {
+  File file(String name) => File(_path([absolute.path, name]));
+
+  String _path(List<String> segment) => segment.join(Platform.pathSeparator);
+}
+
 class BuildConfig {
+  static const defaultConfigFileName = 'sqlite_webassembly_build.yaml';
   static const _metaFileName = 'sqlite_api_meta.yaml';
+  static const _dsqlite = 'dsqlite';
 
-  static String? _dir(String path, [String? join]) {
-    final i = path.lastIndexOf(Platform.pathSeparator);
-    return i == -1 || i == 0
-        ? join
-        : (join == null ? path.substring(0, i) : '${path.substring(0, i + 1)}$join');
-  }
-
-  static File _searchMetaFile(String path) {
-    var metaPath = _dir(path, _metaFileName);
-    File? metaFile;
-    while (metaPath != null && !(metaFile = File(metaPath)).existsSync()) {
-      metaFile = null;
-      metaPath = _dir(Platform.script.path, _metaFileName);
+  static Future<BuildConfig> init(String yamlFile, int version, String rawVersion) async {
+    final file = Directory.current.file('pubspec.yaml');
+    final configFile = Directory.current.file(yamlFile);
+    if (file.existsSync()) {
+      final spec = Pubspec.parse(await file.readAsString());
+      if (spec.dependencies.containsKey(_dsqlite)) {
+        // use by other package:
+        var packageConfig = await findPackageConfig(Directory.current);
+        final pkg = packageConfig!.packages.firstWhere((pkg) => pkg.name == _dsqlite);
+        final preConfig = Directory(pkg.root.path).file(defaultConfigFileName);
+        final metaFile = Directory(pkg.root.path).file(_metaFileName);
+        return BuildConfig._(preConfig, configFile, metaFile, version, rawVersion);
+      } else {
+        final metaFile = Directory.current.file(_metaFileName);
+        return BuildConfig._(configFile, null, metaFile, version, rawVersion);
+      }
     }
-    if (metaFile != null) return metaFile;
     print(red.write('No meta file `$_metaFileName` found.').toString());
     exit(1);
   }
 
-  BuildConfig(String yamlFile, int version, String rawVersion) {
-    final metaFile = _searchMetaFile(yamlFile);
-    final doc = yaml.loadYaml(File(yamlFile).readAsStringSync()) as yaml.YamlMap;
-    exportRuntime = (doc['runtime'] as yaml.YamlList).cast();
-    cflag = (doc['cflag'] as yaml.YamlList).cast().expand((e) => e.split(' '));
-    emitBitInt = doc['emitBitInt'];
-    emflag = (doc['emflag'] as yaml.YamlList).cast().expand((e) => e.split(' '));
-    emflagRelease = (doc['release'] as yaml.YamlList?)?.cast().expand((e) => e.split(' '));
-    emflagDebug = (doc['debug'] as yaml.YamlList?)?.cast().expand((e) => e.split(' '));
-    asm = (doc['asm'] as yaml.YamlList?)?.cast().expand((e) => e.split(' '));
-    wasm = (doc['wasm'] as yaml.YamlList?)?.cast().expand((e) => e.split(' '));
+  BuildConfig._(File hosted, File? pkgConfig, File meta, int version, String rawVersion) {
+    final hostedDoc = yaml.loadYaml(hosted.readAsStringSync()) as yaml.YamlMap;
+    final doc = pkgConfig != null && pkgConfig.existsSync()
+        ? yaml.loadYaml(pkgConfig.readAsStringSync()) as yaml.YamlMap
+        : null;
+    // use original host if the current package or project not defined.
+    exportRuntime = (doc?['runtime'] as yaml.YamlList?)?.cast() ??
+        (hostedDoc['runtime'] as yaml.YamlList).cast();
+    cflag = (doc?['cflag'] as yaml.YamlList?)?.expand((e) => e.split(' ')) ??
+        (hostedDoc['cflag'] as yaml.YamlList).expand((e) => e.split(' '));
+    emitBitInt = doc?['emitBitInt'] ?? hostedDoc['emitBitInt'];
+    emflag = (doc?['emflag'] as yaml.YamlList?)?.expand((e) => e.split(' ')) ??
+        (hostedDoc['emflag'] as yaml.YamlList).expand((e) => e.split(' '));
+    emflagRelease = (doc?['release'] as yaml.YamlList?)?.expand((e) => e.split(' ')) ??
+        (hostedDoc['release'] as yaml.YamlList?)?.expand((e) => e.split(' '));
+    emflagDebug = (doc?['debug'] as yaml.YamlList?)?.expand((e) => e.split(' ')) ??
+        (hostedDoc['debug'] as yaml.YamlList?)?.expand((e) => e.split(' '));
+    asm = doc != null
+        ? (doc['asm'] as yaml.YamlList?)?.expand((e) => e.split(' '))
+        : (hostedDoc['asm'] as yaml.YamlList?)?.expand((e) => e.split(' '));
+    wasm = doc != null
+        ? (doc['wasm'] as yaml.YamlList?)?.expand((e) => e.split(' '))
+        : (hostedDoc['wasm'] as yaml.YamlList?)?.expand((e) => e.split(' '));
     // build export apis
-    final metaDoc = yaml.loadYaml(metaFile.readAsStringSync()) as yaml.YamlMap;
-    if (doc.containsKey('exported')) {
-      exportedApis = (doc['exported'] as yaml.YamlList).cast<String>().toList();
+    final metaDoc = yaml.loadYaml(meta.readAsStringSync()) as yaml.YamlMap;
+    if (doc?.containsKey('exported') == true) {
+      exportedApis = (doc!['exported'] as yaml.YamlList).cast<String>().toList();
     } else {
       exportedApis = (metaDoc['apis'] as yaml.YamlList).cast<String>().toList();
     }

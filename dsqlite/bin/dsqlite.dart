@@ -47,7 +47,7 @@ void main(List<String> args) async {
       buildConfigFile,
       abbr: 'c',
       help: 'Path to build config file.',
-      defaultsTo: 'sqlite_webassembly_build.yaml',
+      defaultsTo: BuildConfig.defaultConfigFileName,
     )
     ..addOption(
       verify,
@@ -77,7 +77,7 @@ void main(List<String> args) async {
   if (result['build']) {
     final out = result[output] as String?;
     if (out != null) {
-      final bc = BuildConfig(result[buildConfigFile], nversion, drelease[1]);
+      final bc = await BuildConfig.init(result[buildConfigFile], nversion, drelease[1]);
       await buildWebAssembly(bc, [out, drelease[1]].join(Platform.pathSeparator), dversion);
       exit(0);
     }

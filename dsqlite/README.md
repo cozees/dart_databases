@@ -7,6 +7,21 @@ The package provide a complete implementation of [database_sql](https://pub.dev/
 It's using WebAssembly api compiled from sqlite3 source code by [emscripten](https://emscripten.org/) when running
 on web browser. All latest of the major browser such as Chrome, FireFox, Safari is supported.
 
+> Important: The web version in this package is using webassembly running output from [emscripten](https://emscripten.org/).
+> Although it work, the performance compare to native IndexedDB Javascript is very slow, plus all sqlite data
+> is loaded all into memory which cause a huge amount of memory being consume by the application. In addition, [emscripten](https://emscripten.org/)
+> does not provide official document to implement File System APIs with browser Native [File System APIs](https://developer.mozilla.org/en-US/docs/Web/API/FileSystem)
+> which could reduce a significant amount of memory need for virtual file system.
+> [Emscripten](https://emscripten.org/) issue tracking for the request and better apis for implement custom File System APIs:
+> * [Web File System Access API ](https://github.com/emscripten-core/emscripten/issues/15277)
+> * [New File System Implementation](https://github.com/emscripten-core/emscripten/issues/15041)
+>
+> **What's next ?**
+> - Explore possibility to implement [VFS](https://sqlite.org/vfs.html) with or without [15041](https://github.com/emscripten-core/emscripten/issues/15041)
+> - Explore possibility to implement module or [virtual table](https://sqlite.org/vtab.html) to redirect data to IndexedDB. The downside is that not all
+>   sqlite feature is supported when running with virtual table.
+> - Move sqlite functionality into web worker or service worker instead of main thread.
+
 # Usage
 Add [database_sql](https://pub.dev/packages/database_sql) and [dsqlite](https://pub.dev/packages/dsqlite) to `pubspec.yaml`
 ```yaml
@@ -62,7 +77,7 @@ generate multiple output with format [ASM](http://asmjs.org/) and [WASM](https:/
 conjunction with a non support and a support to javascript `bigint`. 
 
 ```shell script
-pub run dsqlite -b -d --release 2021:3.36.00 -o /* directory to store the generate file */
+dart run dsqlite -b -d --release 2021:3.36.00 -o /* directory to store the generate file */
 ```
 
 To disable multiple build or include your own desire optimization then you can provide custom build

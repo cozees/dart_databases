@@ -1,8 +1,8 @@
 part of 'generate.dart';
 
-const _jsAnnotation = cb.Reference('JS', 'package:js/js.dart');
-const dartjs = 'dart:js';
-const dartjsUtil = 'dart:js_util';
+const dartjs = 'package:js/js.dart';
+const _jsAnnotation = cb.Reference('JS', dartjs);
+const dartjsUtil = 'package:js/js_util.dart';
 
 final pkgJSFunc = cb.Reference('allowInterop', dartjs);
 
@@ -407,6 +407,11 @@ class WebGenerateEvent {
             tail.property('value').assign(webNullPtr).statement),
         Return(result),
       ]);
+    } else if (name.startsWith('sqlite3_close')) {
+      // special case for close
+      finally$.add(cb.refer('_sync').call([cb.literalFalse]).awaited.statement);
+      nmb.modifier = cb.MethodModifier.async;
+      nmb.returns = createType('Future', dartasync, [nmb.returns!]);
     }
     // create method body
     nmb.body = cb.Block((b) {
@@ -585,105 +590,6 @@ cb.LibraryBuilder initWebLibrary(List<cb.Reference> mixins) {
   builder.name = 'sqlite3';
   builder.annotations.add(_jsAnnotation.call([]));
   builder.body.addAll([
-    _jsReference('module', jsName: 'Module', requiredParam: [
-      _paramater('mod', createType('WasmModule')),
-    ]),
-    cb.Field((fb) => fb
-      ..docs.add('/// module reference to wasm runtime.')
-      ..name = '_wasm'
-      ..modifier = cb.FieldModifier.final$
-      ..type = createType('WasmModule')
-      ..assignment = cb.refer('WasmModule').call([]).code),
-    cb.Field((fb) => fb
-      ..docs.add('/// indicate whether Webassembly is built with BigInt')
-      ..name = 'isBigInt'
-      ..late = true
-      ..modifier = cb.FieldModifier.final$
-      ..type = dartBool),
-    cb.Class((b) => b
-      ..docs.add('/// Javascript webassembly module')
-      ..annotations.add(_jsAnnotation.call([cb.literalString('Object')]))
-      ..name = 'WasmModule'
-      ..constructors.add(cb.Constructor((b) => b
-        ..factory = true
-        ..external = true))
-      ..fields.addAll([
-        cb.Field((fb) => fb
-          ..docs.add('/// a reference to webassembly heapu8.')
-          ..name = 'external:HEAPU8'
-          ..type = createType('List', null, [dartInt]))
-      ])
-      ..methods.addAll([
-        _jsReference('hasOwnProperty', returns: dartBool, requiredParam: [
-          _paramater('name', dartString),
-        ]),
-        _jsReference(
-          'cwrap',
-          requiredParam: [
-            _paramater('apiName', dartString),
-            _paramater('returnType', dartString),
-          ],
-          optionalParam: [
-            _paramater('parameters', createType('List', null, [dartString]).nullable())
-          ],
-        ),
-        _jsReference('_malloc', returns: createType('R'), types: true, requiredParam: [
-          _paramater('length', dartInt),
-        ]),
-        _jsReference('_free', requiredParam: [_paramater('address', dartNum)]),
-        _jsReference('run'),
-        _jsReference('writeArrayToMemory', requiredParam: [
-          _paramater('binary', dartUint8List),
-          _paramater('buffer', dartNum),
-        ]),
-        _jsReference(
-          'setValue',
-          requiredParam: [
-            _paramater('ptr', dartNum),
-            _paramater('value', dartDynamic),
-            _paramater('type', dartString)
-          ],
-          optionalParam: [_paramater('noSafe', dartBool.nullable())],
-        ),
-        _jsReference(
-          'getValue',
-          requiredParam: [_paramater('ptr', dartNum), _paramater('type', dartString)],
-          optionalParam: [_paramater('noSafe', dartBool.nullable())],
-        ),
-        _jsReference('lengthBytesUTF8', returns: dartInt, requiredParam: [
-          _paramater('txt', dartString),
-        ]),
-        _jsReference('lengthBytesUTF16', returns: dartInt, requiredParam: [
-          _paramater('txt', dartString),
-        ]),
-        _jsReference('stringToUTF8', requiredParam: [
-          _paramater('txt', dartString),
-          _paramater('ptr', dartNum),
-          _paramater('maxWriteSize', dartInt),
-        ]),
-        _jsReference(
-          'UTF8ToString',
-          returns: dartString,
-          requiredParam: [_paramater('ptr', dartNum)],
-          optionalParam: [_paramater('maxSizeRead', dartInt.nullable())],
-        ),
-        _jsReference('stringToUTF16', requiredParam: [
-          _paramater('txt', dartString),
-          _paramater('ptr', dartNum),
-          _paramater('maxWriteSize', dartInt),
-        ]),
-        _jsReference(
-          'UTF16ToString',
-          returns: dartString,
-          requiredParam: [_paramater('ptr', dartNum)],
-          optionalParam: [_paramater('maxSizeRead', dartInt.nullable())],
-        ),
-        _jsReference('addFunction', returns: dartInt, requiredParam: [
-          _paramater('func', createType('Function')),
-          _paramater('meta', dartString),
-        ]),
-        _jsReference('removeFunction', requiredParam: [_paramater('ptr', dartNum)]),
-      ])),
     cb.Code(
         '\n\n// typedef to help dynamic library lookup api for current versioning of the sqlite\n'),
     cb.FunctionType((b) => b..returnType = dartString).toTypeDef(voidString.symbol!),
@@ -759,9 +665,17 @@ cb.LibraryBuilder initWebLibrary(List<cb.Reference> mixins) {
           ..static = true
           ..name = 'instance'
           ..modifier = cb.MethodModifier.async
-          ..optionalParameters.add(cb.Parameter((pb) => pb
-            ..name = 'path'
-            ..type = createNullableType('String')))
+          ..optionalParameters.addAll([
+            cb.Parameter((pb) => pb
+              ..name = 'path'
+              ..named = true
+              ..type = createNullableType('String')),
+            cb.Parameter((pb) => pb
+              ..name = 'mountDir'
+              ..named = true
+              ..required = true
+              ..type = createNullableType('String'))
+          ])
           ..returns = createType('Future', dartasync, [createType(apiClassName)])
           ..body = <cb.Code>[
             cb
@@ -772,6 +686,17 @@ cb.LibraryBuilder initWebLibrary(List<cb.Reference> mixins) {
                 .awaited
                 .statement,
             wasm.property('run').call([]).statement,
+            cb
+                .refer('_wasm')
+                .property('FS')
+                .property('mkdir')
+                .call([cb.refer('mountDir').nullChecked]).statement,
+            cb.refer('_wasm').property('FS').property('mount').call([
+              cb.refer('_wasm').property('IDBFS'),
+              cb.refer('newObject', dartjsUtil).call([]),
+              cb.refer('mountDir'),
+            ]).statement,
+            cb.refer('_sync').call([cb.literalTrue]).awaited.statement,
             cb
                 .refer('isBigInt')
                 .assign(wasm.property('hasOwnProperty').call([cb.literalString('HEAPU64')]).and(

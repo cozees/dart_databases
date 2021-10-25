@@ -16,6 +16,7 @@ const crossImport = 'native/library.g.dart?'
     'io=native/library.g.dart';
 
 const constPkg = 'package:dsqlite/src/sqlite/constants.g.dart';
+const pathPkg = 'package:path/path.dart';
 
 const _knownImportAlias = <String, String>{
   dartasync: '_async',
@@ -24,10 +25,10 @@ const _knownImportAlias = <String, String>{
   darttyped: 'typed',
   dartconv: 'conv',
   'dart:io': 'io',
-  dartjs: 'js',
+  dartjs: 'pkgjs',
   dartjsUtil: 'jsutil',
+  pathPkg: 'filepath',
   'package:database_sql/database_sql.dart': 'dbsql',
-  'package:js/js.dart': 'pkgjs',
   crossImport: 'cpf',
 };
 
@@ -64,7 +65,7 @@ class TypeTransformProcedure {
   final bool canCastNatively;
 
   cb.TypeReference dartTypeOrAlias([bool includeEncode = false]) =>
-      canCastNatively || (needEncode && includeEncode) ? dartType :   alias;
+      canCastNatively || (needEncode && includeEncode) ? dartType : alias;
 
   cb.TypeReference dartTypeOrAliasWeb([bool includeEncode = false]) =>
       canCastNatively || (needEncode && includeEncode)
@@ -358,6 +359,9 @@ class ParserEvent extends ComponentEvent {
       for (var i in tobeRemoved.reversed) {
         mb.requiredParameters.removeAt(i);
       }
+      if (name.startsWith('sqlite3_close')) {
+        mb.returns = createType('Future', dartasync, [mb.returns!]);
+      }
       mb.name = mb.name!.substring(8);
       mb.lambda = true;
       mb.body = cb.refer('_sqlite').property(mb.name!).call(args).code;
@@ -511,14 +515,28 @@ cb.ClassBuilder initCrossPlatformAPI() {
       ..toThis = true))));
   builder.methods.addAll([
     cb.Method((mb) => mb
+      ..docs.add('/// The [mountDir] argument is only viable and required when running on web.')
       ..static = true
       ..modifier = cb.MethodModifier.async
       ..returns = createType('Future', dartasync, [createType(apiClassName)])
-      ..optionalParameters.add(cb.Parameter((pb) => pb
-        ..name = 'path'
-        ..type = createNullableType('String')))
+      ..optionalParameters.addAll([
+        cb.Parameter((pb) => pb
+          ..name = 'path'
+          ..named = true
+          ..type = createNullableType('String')),
+        cb.Parameter((pb) => pb
+          ..name = 'mountDir'
+          ..named = true
+          ..type = createNullableType('String')),
+      ])
       ..body = Return(cb.refer(apiClassName).property('_').call([
-        cb.refer('SQLiteLibrary', crossImport).property('instance').call([cb.refer('path')]).awaited
+        cb.refer('SQLiteLibrary', crossImport).property('instance').call(
+          [],
+          {
+            'path': cb.refer('path'),
+            'mountDir': cb.refer('mountDir'),
+          },
+        ).awaited
       ]))
       ..name = 'instance'),
     cb.Method((mb) => mb

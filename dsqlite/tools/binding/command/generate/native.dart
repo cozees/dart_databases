@@ -387,6 +387,10 @@ class NativeGenerateEvent {
             args.last.property('value').assign(cNullPtr).statement),
         Return(result),
       ]);
+    } else if (name.startsWith('sqlite3_close')) {
+      // special case for close
+      nmb.modifier = cb.MethodModifier.async;
+      nmb.returns = createType('Future', dartasync, [nmb.returns!]);
     }
     // create method body
     nmb.body = cb.Block((b) {
@@ -578,9 +582,16 @@ cb.LibraryBuilder _generateLibraryCode(cb.LibraryBuilder builder) {
         ..name = 'instance'
         ..modifier = cb.MethodModifier.async
         ..returns = createType('Future', dartasync, [createType(apiClassName)])
-        ..optionalParameters.add(cb.Parameter((pb) => pb
-          ..name = 'path'
-          ..type = createNullableType('String')))
+        ..optionalParameters.addAll([
+          cb.Parameter((pb) => pb
+            ..name = 'path'
+            ..named = true
+            ..type = createNullableType('String')),
+          cb.Parameter((pb) => pb
+            ..name = 'mountDir'
+            ..named = true
+            ..type = createNullableType('String'))
+        ])
         ..body = If(
           cb.refer('Platform', 'dart:io').property('isIOS'),
           Return(apiConstructor.call([dynamicLibrary.property('process').call([])])),

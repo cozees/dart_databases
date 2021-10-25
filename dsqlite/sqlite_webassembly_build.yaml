@@ -11,6 +11,8 @@ runtime:
   - 'lengthBytesUTF16'
   - 'addFunction'
   - 'removeFunction'
+  - 'FS'
+  - 'IDBFS'
 #exported:
   # _malloc and _free is pre-include
   # all api is include from section `apis` in `sqlite_api_meta.yaml`
@@ -32,6 +34,8 @@ emflag:
   - '-s SINGLE_FILE=0'
   - '-s ENVIRONMENT=web'
   - '-s MODULARIZE=1'
+  - '-s FORCE_FILESYSTEM=1'
+  - '-lidbfs.js'
 release:
   - '-O3'
   - '-flto'

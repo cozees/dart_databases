@@ -57,27 +57,21 @@ sqlite.3.17.0.tar.gz:
 	tar xzf $@ --strip-components=1 -C ${SQLITE_DIR}/3017000
 	rm $@
 
-dsqlite_test: dsqlite_test_clean dsqlite_test_chrome dsqlite_test_vm dsqlite_coverage
-	@cat ${WEBASSEMBLY_TEMP_CACHE} > ${WEBASSEMBLY_TEMP}
-	@rm -f ${WEBASSEMBLY_TEMP_CACHE}
+dsqlite_test: dsqlite_test_clean cache_web_template dsqlite_test_chrome_debug dsqlite_test_chrome_release dsqlite_test_vm dsqlite_coverage web_template_clean
 
-dsqlite_test_local: dsqlite_test_clean dsqlite_test_chrome_quick dsqlite_test_vm dsqlite_coverage
-	@cat ${WEBASSEMBLY_TEMP_CACHE} > ${WEBASSEMBLY_TEMP}
-	@rm -f ${WEBASSEMBLY_TEMP_CACHE}
+dsqlite_test_local: dsqlite_test_clean cache_web_template dsqlite_test_chrome_debug dsqlite_test_vm dsqlite_coverage web_template_clean
 
-dsqlite_test_clean:
+dsqlite_test_clean: cache_web_template
 	@echo 'Remove exist coverage ...'
 	@rm -f ${COVERAGE}/*.info
 	@rm -f ${COVERAGE}/*.json
-	@echo 'Backup html template ...'
-	@cat ${WEBASSEMBLY_TEMP} > ${WEBASSEMBLY_TEMP_CACHE}
 
 dsqlite_test_vm:
 	@echo 'Run dart test on VM'
 	dart test --coverage coverage --platform vm --exclude-tags "version-solo"
 	dart test --coverage coverage --platform vm test/version_test.dart
 
-dsqlite_test_chrome: dsqlite_test_chrome_quick
+dsqlite_test_chrome_release:
 	@echo 'Run dart test release (No Coverage) on Chrome'
 	@for bt in ${WEBASSEMBLY_RELEASE} ; do \
   		cat ${WEBASSEMBLY_TEMP_CACHE} > ${WEBASSEMBLY_TEMP}; \
@@ -86,7 +80,7 @@ dsqlite_test_chrome: dsqlite_test_chrome_quick
 		dart test --platform chrome ${WEBASSEMBLY_CI} --exclude-tags "version-solo"; \
 	done
 
-dsqlite_test_chrome_quick:
+dsqlite_test_chrome_debug:
 	@echo 'Run dart test debug (normal and bigint) coverage on Chrome'
 	@for bt in ${WEBASSEMBLY_DEBUG} ; do \
 		cat ${WEBASSEMBLY_TEMP_CACHE} > ${WEBASSEMBLY_TEMP}; \
@@ -95,6 +89,14 @@ dsqlite_test_chrome_quick:
 		dart test --coverage coverage --platform chrome ${WEBASSEMBLY_CI} --exclude-tags "version-solo"; \
 	done
 	dart test --coverage coverage --platform chrome test/version_test.dart
+
+cache_web_template:
+	@echo 'Backup html template ...'
+	@cat ${WEBASSEMBLY_TEMP} > ${WEBASSEMBLY_TEMP_CACHE}
+
+web_template_clean:
+	@cat ${WEBASSEMBLY_TEMP_CACHE} > ${WEBASSEMBLY_TEMP}
+	@rm -f ${WEBASSEMBLY_TEMP_CACHE}
 
 dsqlite_coverage: dsqlite_coverage_format dsqlite_coverage_combine
 	rm -rf ${COVERAGE}/html/*
