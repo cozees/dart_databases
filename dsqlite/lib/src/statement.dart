@@ -78,6 +78,15 @@ class Statement implements sql.Statement, sql.ReadStatement, sql.WriteStatement 
   // column name and index mapping
   late final Map<String, int> _columnIndexes;
 
+  /// return the mapping index between column name and column index.
+  Map<String, int> get columnsIndexes => Map.unmodifiable(_columnIndexes);
+
+  /// return list of declaration type of each column
+  List<String?> get declarationTypes => List.unmodifiable(_declTypes);
+
+  /// return list of columns
+  List<String> get columns => List.unmodifiable(_columns);
+
   @override
   int get parameterCount => _paramCount;
 

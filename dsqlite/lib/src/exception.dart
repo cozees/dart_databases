@@ -13,7 +13,7 @@ class SQLiteException extends sql.DatabaseException {
     final binder = Driver.binder;
     final dbMessage = message ?? binder.errmsg(cdb);
     final extendedCode = binder.extended_errcode(cdb);
-    final errStr = returnCode != null ? binder.errstr(extendedCode) : '';
+    final errStr = returnCode != null ? binder.errstr(returnCode) : '';
     final explanation = '$errStr (code $extendedCode)';
     return SQLiteException.withCode(
       code: returnCode,
