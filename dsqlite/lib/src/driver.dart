@@ -24,11 +24,12 @@ class Driver implements sql.Driver<DataSource> {
   /// if provide [connectHook], the hook will be call upon successfully open sqlite database.
   static Future<Driver> initialize({
     String? path,
+    String? webMountPath,
     Level logLevel = Level.OFF,
     void Function(Driver driver, Database db, DataSource ds)? connectHook,
   }) async {
     if (_instance == null) {
-      _binder = await sqlite.SQLiteLibrary.instance(path);
+      _binder = await sqlite.SQLiteLibrary.instance(path: path, mountDir: webMountPath);
       _instance = Driver._(connectHook);
       Logger.root.level = logLevel;
       logger = logLevel == Level.OFF ? null : Logger('SQLiteDriver');

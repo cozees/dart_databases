@@ -28,7 +28,13 @@ void main() {
   setUpAll(() async {
     expect(() => dsqlite.Driver.binder, throwsException);
     sqldb.registerDriver(
-        driverName, await dsqlite.Driver.initialize(path: dLibraries.first, logLevel: Level.ALL));
+      driverName,
+      await dsqlite.Driver.initialize(
+        path: dLibraries.first.libraryPath,
+        webMountPath: dLibraries.first.mountPoint,
+        logLevel: Level.ALL,
+      ),
+    );
     ffiNative = dsqlite.Driver.binder.nativeLibrary;
     // populate database
     db = sqldb.open(driverName, ds.next(dbFiles)) as dsqlite.Database;

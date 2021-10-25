@@ -538,7 +538,7 @@ class Database implements sql.Database {
       }
     }
     // close Database
-    Driver.binder.close_compat(_db!);
+    await Driver.binder.close_compat(_db!);
     _db = null;
   }
 
@@ -596,32 +596,3 @@ class TwoResult<T, D> {
   final T t;
   final D d;
 }
-
-// extension _AllocationInt on int {
-//   ffi.Pointer toNative() {
-//     final byteCount = (bitLength / 8).ceil();
-//     if (byteCount < 2) return pkgffi.malloc.allocate<ffi.Int8>(byteCount)..value = this;
-//     if (byteCount < 4) return pkgffi.malloc.allocate<ffi.Int16>(byteCount)..value = this;
-//     if (byteCount < 8) return pkgffi.malloc.allocate<ffi.Int32>(byteCount)..value = this;
-//     return pkgffi.malloc.allocate<ffi.Int64>(byteCount)..value = this; // coverage:ignore-line
-//   }
-//
-//   bool isEqualTo(ffi.Pointer other) {
-//     final byteCount = (bitLength / 8).ceil();
-//     if (byteCount < 2) return other.cast<ffi.Int8>().value == this;
-//     if (byteCount < 4) return other.cast<ffi.Int16>().value == this;
-//     if (byteCount < 8) return other.cast<ffi.Int32>().value == this;
-//     return other.cast<ffi.Int64>().value == this; // coverage:ignore-line
-//   }
-// }
-//
-// extension _CastPointer on List<ffi.Pointer> {
-//   int indexOfIntValue(int id) {
-//     for (var i = 0; i < length; i++) {
-//       if (id.isEqualTo(this[i])) {
-//         return i;
-//       }
-//     }
-//     return -1;
-//   }
-// }

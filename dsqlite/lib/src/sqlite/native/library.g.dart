@@ -234,7 +234,7 @@ class SQLiteLibrary extends _SQLiteLibrary
         _MixinExtra {
   SQLiteLibrary._(ffi.DynamicLibrary library) : super(library);
 
-  static _async.Future<SQLiteLibrary> instance([String? path]) async {
+  static _async.Future<SQLiteLibrary> instance({String? path, String? mountDir}) async {
     if (io.Platform.isIOS) {
       return SQLiteLibrary._(ffi.DynamicLibrary.process());
     } else if (path != null) {

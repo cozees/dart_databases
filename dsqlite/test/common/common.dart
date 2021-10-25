@@ -13,11 +13,12 @@ import 'dlibrary_native.dart'
 /// native and web support
 abstract class PlatformLibrary {
   String get libraryPath;
+  String? get mountPoint;
 }
 
 final dLibraries = [
-  platformLibraries('latest').libraryPath,
-  platformLibraries('3017000').libraryPath,
+  platformLibraries('latest'),
+  platformLibraries('3017000'),
 ];
 
 abstract class IncrementalDataSource {

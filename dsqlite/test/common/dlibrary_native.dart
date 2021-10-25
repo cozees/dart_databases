@@ -16,6 +16,9 @@ class _DNativeLibrary implements PlatformLibrary {
   @override
   String get libraryPath => File(_libPath).absolute.path;
 
+  @override
+  String? get mountPoint => null;
+
   // return relative only, Dynamic library need absolute path.
   String get _libPath {
     if (Platform.isMacOS) {

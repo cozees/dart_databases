@@ -25,7 +25,8 @@ void main() async {
     sqldb.registerDriver(
       driverName,
       await dsqlite.Driver.initialize(
-        path: dLibraries.last,
+        path: dLibraries.last.libraryPath,
+        webMountPath: dLibraries.last.mountPoint,
         logLevel: Level.ALL,
       ),
     );

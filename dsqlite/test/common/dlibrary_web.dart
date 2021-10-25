@@ -7,6 +7,8 @@ import 'package:js/js.dart';
 
 import 'common.dart';
 
+const webMountPoint = '/data';
+
 // path to compiled sqlite webassembly form emscripten
 // This is just dummy as dart not release provide a way to load javascript from test
 // The only have custom javascript is provide custom template
@@ -21,6 +23,9 @@ class _DWebLibrary implements PlatformLibrary {
 
   @override
   String get libraryPath => '$host$version/sqlite.wasm';
+
+  @override
+  String? get mountPoint => webMountPoint;
 }
 
 IncrementalDataSource createDataSource(String test) {
@@ -31,7 +36,7 @@ IncrementalDataSource createDataSource(String test) {
 external void unlink(String path);
 
 class _WebIncrementalDataSource extends IncrementalDataSource {
-  _WebIncrementalDataSource(String test) : super('.', test);
+  _WebIncrementalDataSource(String test) : super(webMountPoint, test);
 
   @override
   DataSource next(List<Future Function()> registered,

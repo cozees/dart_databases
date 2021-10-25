@@ -33,7 +33,13 @@ void main() {
 
   setUpAll(() async {
     sqldb.registerDriver(
-        driverName, await dsqlite.Driver.initialize(path: dLibraries.first, logLevel: Level.ALL));
+      driverName,
+      await dsqlite.Driver.initialize(
+        path: dLibraries.first.libraryPath,
+        webMountPath: dLibraries.first.mountPoint,
+        logLevel: Level.ALL,
+      ),
+    );
     db = sqldb.open(driverName, dsrc) as dsqlite.Database;
     ffiNative = dsqlite.Driver.binder.nativeLibrary;
     await db.exec(simpleTable);
@@ -447,7 +453,13 @@ void main() {
 
 Future<void> openSimpleDB(IsolateMeta meta) async {
   sqldb.registerDriver(
-      driverName, await dsqlite.Driver.initialize(path: dLibraries.first, logLevel: Level.ALL));
+    driverName,
+    await dsqlite.Driver.initialize(
+      path: dLibraries.first.libraryPath,
+      webMountPath: dLibraries.first.mountPoint,
+      logLevel: Level.ALL,
+    ),
+  );
   final db1 = sqldb.open(driverName, meta.dsrc) as dsqlite.Database;
   await db1.exec('PRAGMA journal_mode=WAL;');
   await popularSimpleData(db1, Simple.generate(2));
@@ -540,7 +552,13 @@ class IsolateMeta {
 void writeData(IsolateMeta meta) async {
   // must initial driver on every isolate.
   sqldb.registerDriver(
-      driverName, await dsqlite.Driver.initialize(path: dLibraries.first, logLevel: Level.ALL));
+    driverName,
+    await dsqlite.Driver.initialize(
+      path: dLibraries.first.libraryPath,
+      webMountPath: dLibraries.first.mountPoint,
+      logLevel: Level.ALL,
+    ),
+  );
   ffiNative = dsqlite.Driver.binder.nativeLibrary;
   final db = sqldb.open(driverName, meta.dsrc) as dsqlite.Database;
   await db.exec(simpleTable);
@@ -566,7 +584,13 @@ void writeData(IsolateMeta meta) async {
 void readData(IsolateMeta meta) async {
   // must initial driver on every isolate.
   sqldb.registerDriver(
-      driverName, await dsqlite.Driver.initialize(path: dLibraries.first, logLevel: Level.ALL));
+    driverName,
+    await dsqlite.Driver.initialize(
+      path: dLibraries.first.libraryPath,
+      webMountPath: dLibraries.first.mountPoint,
+      logLevel: Level.ALL,
+    ),
+  );
   ffiNative = dsqlite.Driver.binder.nativeLibrary;
   final db = sqldb.open(driverName, meta.dsrc) as dsqlite.Database;
   if (meta.useCustomBusy) {

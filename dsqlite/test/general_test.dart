@@ -20,7 +20,11 @@ void main() async {
     expect(() => dsqlite.Driver.binder, throwsException);
     sqldb.registerDriver(
       driverName,
-      await dsqlite.Driver.initialize(path: dLibraries.first, logLevel: Level.ALL),
+      await dsqlite.Driver.initialize(
+        path: dLibraries.first.libraryPath,
+        webMountPath: dLibraries.first.mountPoint,
+        logLevel: Level.ALL,
+      ),
     );
   });
 

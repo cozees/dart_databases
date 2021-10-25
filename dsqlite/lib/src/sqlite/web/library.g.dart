@@ -6,12 +6,11 @@
 library sqlite3;
 
 import 'dart:async' as _async;
-import 'dart:js' as js;
-import 'dart:js_util' as jsutil;
 import 'dart:typed_data' as typed;
 
 import 'package:database_sql/database_sql.dart' as dbsql;
 import 'package:js/js.dart' as pkgjs;
+import 'package:js/js_util.dart' as jsutil;
 
 part 'binder.g.dart';
 part 'context.g.dart';
@@ -118,80 +117,13 @@ const _funcWasmMeta = <Type, FunctionMeta>{
   DartDefDefTypeGen10: FunctionMeta('viiiij', _wrapper7)
 };
 
-/// a reference to webassembly Module method.
-@pkgjs.JS('Module')
-external module(WasmModule mod);
-
-/// module reference to wasm runtime.
-final WasmModule _wasm = WasmModule();
-
-/// indicate whether Webassembly is built with BigInt
-late final bool isBigInt;
-
-/// Javascript webassembly module
-@pkgjs.JS('Object')
-class WasmModule {
-  external factory WasmModule();
-
-  /// a reference to webassembly heapu8.
-  external List<int> HEAPU8;
-
-  /// a reference to webassembly hasOwnProperty method.
-  external bool hasOwnProperty(String name);
-
-  /// a reference to webassembly cwrap method.
-  external cwrap(String apiName, String returnType, [List<String>? parameters]);
-
-  /// a reference to webassembly _malloc method.
-  external R _malloc<R>(int length);
-
-  /// a reference to webassembly _free method.
-  external _free(num address);
-
-  /// a reference to webassembly run method.
-  external run();
-
-  /// a reference to webassembly writeArrayToMemory method.
-  external writeArrayToMemory(typed.Uint8List binary, num buffer);
-
-  /// a reference to webassembly setValue method.
-  external setValue(num ptr, dynamic value, String type, [bool? noSafe]);
-
-  /// a reference to webassembly getValue method.
-  external getValue(num ptr, String type, [bool? noSafe]);
-
-  /// a reference to webassembly lengthBytesUTF8 method.
-  external int lengthBytesUTF8(String txt);
-
-  /// a reference to webassembly lengthBytesUTF16 method.
-  external int lengthBytesUTF16(String txt);
-
-  /// a reference to webassembly stringToUTF8 method.
-  external stringToUTF8(String txt, num ptr, int maxWriteSize);
-
-  /// a reference to webassembly UTF8ToString method.
-  external String UTF8ToString(num ptr, [int? maxSizeRead]);
-
-  /// a reference to webassembly stringToUTF16 method.
-  external stringToUTF16(String txt, num ptr, int maxWriteSize);
-
-  /// a reference to webassembly UTF16ToString method.
-  external String UTF16ToString(num ptr, [int? maxSizeRead]);
-
-  /// a reference to webassembly addFunction method.
-  external int addFunction(Function func, String meta);
-
-  /// a reference to webassembly removeFunction method.
-  external removeFunction(num ptr);
-}
-
 // typedef to help dynamic library lookup api for current versioning of the sqlite
 typedef _DefVoidStringFunc = String Function();
 typedef _DefLibVersionDart = int Function();
 
 // Destructor use to free pointer allocation
 void _sqliteDestructor(num ptr) => _wasm._free(ptr);
-final int _ptrDestructor = _wasm.addFunction(js.allowInterop(_sqliteDestructor), 'vi');
+final int _ptrDestructor = _wasm.addFunction(pkgjs.allowInterop(_sqliteDestructor), 'vi');
 
 abstract class _SQLiteLibrary {
   late final _DefLibVersionDart _libVersionNumber =
@@ -225,9 +157,12 @@ class SQLiteLibrary extends _SQLiteLibrary
         _MixinExtra {
   SQLiteLibrary._();
 
-  static _async.Future<SQLiteLibrary> instance([String? path]) async {
+  static _async.Future<SQLiteLibrary> instance({String? path, required String? mountDir}) async {
     await jsutil.promiseToFuture(module(_wasm));
     _wasm.run();
+    _wasm.FS.mkdir(mountDir!);
+    _wasm.FS.mount(_wasm.IDBFS, jsutil.newObject(), mountDir);
+    await _sync(true);
     isBigInt = _wasm.hasOwnProperty('HEAPU64') && _wasm.hasOwnProperty('HEAP64');
     return SQLiteLibrary._();
   }

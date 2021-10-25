@@ -64,8 +64,9 @@ class SQLiteLibrary {
 
   final cpf.SQLiteLibrary _sqlite;
 
-  static _async.Future<SQLiteLibrary> instance([String? path]) async {
-    return SQLiteLibrary._(await cpf.SQLiteLibrary.instance(path));
+  /// The [mountDir] argument is only viable and required when running on web.
+  static _async.Future<SQLiteLibrary> instance({String? path, String? mountDir}) async {
+    return SQLiteLibrary._(await cpf.SQLiteLibrary.instance(path: path, mountDir: mountDir));
   }
 
   /// Return the current version of current sqlite3 library in number
@@ -122,10 +123,10 @@ class SQLiteLibrary {
   int clear_bindings(cpf.PtrStmt arg1) => _sqlite.clear_bindings(arg1);
 
   /// Cross platform interface api for sqlite3_close
-  int close(cpf.PtrSqlite3 arg1) => _sqlite.close(arg1);
+  _async.Future<int> close(cpf.PtrSqlite3 arg1) => _sqlite.close(arg1);
 
   /// Cross platform interface api for sqlite3_close_v2
-  int close_v2(cpf.PtrSqlite3 arg1) => _sqlite.close_v2(arg1);
+  _async.Future<int> close_v2(cpf.PtrSqlite3 arg1) => _sqlite.close_v2(arg1);
 
   /// Cross platform interface api for sqlite3_column_blob
   typed.Uint8List? column_blob(cpf.PtrStmt arg1, int iCol) => _sqlite.column_blob(arg1, iCol);

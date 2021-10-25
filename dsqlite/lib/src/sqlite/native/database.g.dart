@@ -328,11 +328,11 @@ mixin _MixinDatabase on _SQLiteLibrary {
     return _h_sqlite3_changes(arg1);
   }
 
-  int close(PtrSqlite3 arg1) {
+  _async.Future<int> close(PtrSqlite3 arg1) async {
     return _h_sqlite3_close(arg1);
   }
 
-  int close_v2(PtrSqlite3 arg1) {
+  _async.Future<int> close_v2(PtrSqlite3 arg1) async {
     if (libVersionNumber < 3007014) {
       throw dbsql.DatabaseException('API sqlite3_close_v2 is not available before 3.7.14');
     }

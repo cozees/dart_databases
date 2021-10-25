@@ -13,7 +13,7 @@ extension CompatApi on SQLiteLibrary {
   /* 3.7.14 :: 2012-09-03 */
 
   ///
-  int close_compat(cpf.PtrSqlite3 db) => libVersionNumber < 3007014 ? close(db) : close_v2(db);
+  _async.Future<int> close_compat(cpf.PtrSqlite3 db) => libVersionNumber < 3007014 ? close(db) : close_v2(db);
 
   ///
   int prepare_compat(

@@ -45,7 +45,8 @@ void main() async {
     sqldb.registerDriver(
       driverName,
       await dsqlite.Driver.initialize(
-        path: dLibraries.first,
+        path: dLibraries.first.libraryPath,
+        webMountPath: dLibraries.first.mountPoint,
         logLevel: Level.ALL,
         connectHook: (driver, db, ds) {
           /* Register hook over here */

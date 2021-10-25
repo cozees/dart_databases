@@ -87,15 +87,23 @@ mixin _MixinDatabase on _SQLiteLibrary {
     return _h_sqlite3_changes(arg1.address);
   }
 
-  int close(PtrSqlite3 arg1) {
-    return _h_sqlite3_close(arg1.address);
+  _async.Future<int> close(PtrSqlite3 arg1) async {
+    try {
+      return _h_sqlite3_close(arg1.address);
+    } finally {
+      await _sync(false);
+    }
   }
 
-  int close_v2(PtrSqlite3 arg1) {
+  _async.Future<int> close_v2(PtrSqlite3 arg1) async {
     if (_h_sqlite3_close_v2 == null) {
       throw dbsql.DatabaseException('API sqlite3_close_v2 is not available before 3.7.14');
     }
-    return _h_sqlite3_close_v2!(arg1.address);
+    try {
+      return _h_sqlite3_close_v2!(arg1.address);
+    } finally {
+      await _sync(false);
+    }
   }
 
   int errcode(PtrSqlite3 db) {

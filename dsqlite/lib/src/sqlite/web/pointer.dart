@@ -16,7 +16,8 @@ class Allocator {
 extension AllocatorAlloc on Allocator {
   Pointer<T> call<T extends NativeType>([int count = 1]) {
     if (T == Int8 || T == Uint8 || T == Utf8) return Pointer.fromAddress(_wasm._malloc(1 * count));
-    if (T == Int16 || T == Uint16 || T == Utf16) return Pointer.fromAddress(_wasm._malloc(2 * count));
+    if (T == Int16 || T == Uint16 || T == Utf16)
+      return Pointer.fromAddress(_wasm._malloc(2 * count));
     if (T == Int32 || T == Uint32) return Pointer.fromAddress(_wasm._malloc(4 * count));
     if (T == Int64 || T == Uint64) return Pointer.fromAddress(_wasm._malloc(8 * count));
     if (T == Float) return Pointer.fromAddress(_wasm._malloc(4 * count));
@@ -25,9 +26,8 @@ extension AllocatorAlloc on Allocator {
     // hacked we can't check type generic T is Pointer is not work as T has generic type.
     // T = Pointer<?> is not possible
     final at = T.toString();
-    if (!at.startsWith('Pointer<') || !at.endsWith('>')) {
-      throw Exception('Malloc allocation only support allocate scalar type or pointer only.');
-    }
+    assert(at.startsWith('Pointer<') && at.endsWith('>'),
+        'Malloc allocation only support allocate scalar type or pointer only.');
     return Pointer<T>.fromAddress(_wasm._malloc(4));
   }
 }
@@ -47,7 +47,7 @@ class Pointer<T extends NativeType> extends NativeType {
       [Object? exceptionalReturn]) {
     final funcMeta = _funcWasmMeta[f.runtimeType]!;
     if (funcMeta.wrapper != null) f = funcMeta.wrapper!(f);
-    return Pointer.fromAddress(_wasm.addFunction(js.allowInterop(f), funcMeta.meta).toInt());
+    return Pointer.fromAddress(_wasm.addFunction(pkgjs.allowInterop(f), funcMeta.meta).toInt());
   }
 
   final int address;
