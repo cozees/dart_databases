@@ -48,6 +48,6 @@ Future<void> protect(String driverName, Object dataSource,
   try {
     await block(db);
   } finally {
-    db.close();
+    await db.close();
   }
 }
