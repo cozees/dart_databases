@@ -1,0 +1,19 @@
+name: web
+description: An absolute bare-bones web app.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: '>=2.14.0 <3.0.0'
+
+
+dependencies:
+  crypto: ^3.0.1
+  dsqlite:
+    path: ../../dsqlite
+
+dev_dependencies:
+  build_runner: ^1.10.0
+  build_web_compilers: ^2.11.0
+  lints: ^1.0.0
+  webdev: ^2.7.6

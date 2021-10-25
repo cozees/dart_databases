@@ -1,0 +1,41 @@
+runtime:
+  - 'cwrap'
+  - 'setValue'
+  - 'getValue'
+  - 'UTF8ToString'
+  - 'stringToUTF8'
+  - 'writeArrayToMemory'
+  - 'lengthBytesUTF8'
+  - 'addFunction'
+  - 'removeFunction'
+  - 'FS'
+  - 'IDBFS'
+emitBitInt: false
+# if true build will out put 2 additional file that build with option -s WASM_BIGINT
+cflag:
+  - '-O2'
+  - '-DSQLITE_OMIT_LOAD_EXTENSION'
+  - '-DSQLITE_DISABLE_LFS'
+  - '-DSQLITE_THREADSAFE=0'
+emflag:
+  # EXPORTED_FUNCTIONS and EXPORTED_RUNTIME_METHODS is included on the fly
+  - '--memory-init-file 0'
+  - '-s RESERVED_FUNCTION_POINTERS=64'
+  - '-s SINGLE_FILE=0'
+  - '-s ENVIRONMENT=web'
+  - '-s MODULARIZE=1'
+  - '-s FORCE_FILESYSTEM=1'
+  - '-lidbfs.js'
+release:
+  - '-O3'
+  - '-flto'
+  - '--closure 1'
+  - '-s INLINING_LIMIT=0'
+debug:
+  - '-O1'
+  - '-s ASSERTIONS=1'
+  - '-s INLINING_LIMIT=1'
+  - '--closure 0'
+# wasm compiled, if have any configuration the option `-s WASM=1` is included
+wasm:
+  - '-s ALLOW_MEMORY_GROWTH=1'
