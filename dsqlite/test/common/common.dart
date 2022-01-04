@@ -17,8 +17,8 @@ abstract class PlatformLibrary {
 }
 
 final dLibraries = [
-  platformLibraries('latest'),
-  platformLibraries('3017000'),
+  platformLibraries('3370000'),
+  platformLibraries('3170000'),
 ];
 
 abstract class IncrementalDataSource {

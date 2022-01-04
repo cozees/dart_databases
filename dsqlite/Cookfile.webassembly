@@ -1,0 +1,7 @@
+
+WEBASSEMBLY_OUT = "test/webassembly/build"
+
+webassembly_build:
+    @print "Build webassemble module via emscripten ..."
+    #dart 'run' "bin/dsqlite.dart" '-b' "--release" "2017:3.17.00" '-o' WEBASSEMBLY_OUT
+    #dart 'run' "bin/dsqlite.dart" '-b' "--release" "2021:3.37.00" '-o' WEBASSEMBLY_OUT

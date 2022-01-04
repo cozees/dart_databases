@@ -11,7 +11,8 @@ Future<void> buildWebAssembly(BuildConfig config, String out, String dversion) a
     print(red.write('Make sure configuration include either `wasm` or `asm` or both.'));
     exit(1);
   }
-  final path = ['build', 'sqlite', 'sqlite-amalgamation-$dversion'].join(Platform.pathSeparator);
+  final path =
+      ['build', 'sqlite', dversion, 'sqlite-amalgamation-$dversion'].join(Platform.pathSeparator);
   // build bytecode
   final cfile = [path, 'sqlite3.c'].join(Platform.pathSeparator);
   final bcfile = [path, 'sqlite3.bc'].join(Platform.pathSeparator);

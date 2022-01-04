@@ -1,0 +1,87 @@
+// options and flag
+force = false               // by default, if the folder is already exist it won't try to download
+
+// sqlite flag and info
+SQLITES = [
+    [2021, "3.37.0"],
+    [2017, "3.17.0"],
+]
+SQLITE_DIR = "build/sqlite"
+SQLITE_AMALGAMATION = "sqlite-amalgamation"
+
+SQLITE_SHARE_NAME = "libsqlite3"
+
+GCC_FLAGS = [
+    '-Os',
+    '-ldl',
+    '-lm',
+    '-lreadline',
+    '-lncurses',
+]
+
+SQLITE_FLAGS = [
+    '-DSQLITE_ENABLE_COLUMN_METADATA=1',
+    '-DSQLITE_ENABLE_NORMALIZE=1',
+    '-DSQLITE_ENABLE_MEMORY_MANAGEMENT=1',
+    '-DSQLITE_ENABLE_PREUPDATE_HOOK=1',
+    '-DSQLITE_ENABLE_SNAPSHOT=1',
+    '-DSQLITE_ENABLE_STMT_SCANSTATUS=1',
+    '-DSQLITE_ENABLE_UNLOCK_NOTIFY=1',
+    '-DSQLITE_ENABLE_API_ARMOR=1',
+]
+
+initialize:
+    for i, siv in SQLITES {
+        // sqlite version download link format: 3.n.p.b => 3nnppbb
+        VERSION = @ssplit '--by' '.' siv[1]
+        M = VERSION[0] // major 3.
+        N = @spad '-m' 2 '-l' 1 '--by' '0' VERSION[1]
+        P = @spad '-m' 2 '-l' 1 '--by' '0' VERSION[2]
+        B = "00"
+        if sizeof VERSION >= 4 {
+            B = @spad '-m' 2 '-l' 1 '--by' '0' VERSION[3]
+        }
+        siv += "${M}${N}${P}${B}"
+        siv += "https://sqlite.org/${siv[0]}/sqlite-amalgamation-${M}${N}${P}${B}.zip"
+    }
+    if force {
+        @sqlite_clean
+    }
+
+sqlite_clean:
+    @rm '-r' "${SQLITE_DIR}/${lsink[2]}/"
+
+sqlite_build:
+    for i, lsink in SQLITES {
+        pdir = "${SQLITE_DIR}/${lsink[2]}"
+        if force || !(~"${SQLITE_DIR}/${lsink[2]}" exists) {
+            @print "Download Sqlite version ${lsink[3]}"
+            @mkdir '-p' pdir
+            @get lsink[3] > "${pdir}/sqlite.zip"
+            @extract '-o' pdir "${pdir}/sqlite.zip"
+            @rm "${pdir}/sqlite.zip"
+        }
+
+        // clean up existing build
+        srcDir = "${pdir}/${SQLITE_AMALGAMATION}-${lsink[2]}"
+        shareFile = "${srcDir}/libsqlite3.so"
+        if ~shareFile exists {
+            @rm shareFile
+        }
+
+        @print "Build share library ${lsink[1]} ..."
+        @workin srcDir
+        if on darwin {
+            #gcc SQLITE_FLAGS GCC_FLAGS '-o' "${SQLITE_SHARE_NAME}.dylib" '-shared' 'sqlite3.c'
+        } else if on linux {
+            #gcc SQLITE_FLAGS GCC_FLAGS '-o' "${SQLITE_SHARE_NAME}.so" '-shared' 'sqlite3.c'
+        } else if on windows {
+            #gcc SQLITE_FLAGS GCC_FLAGS '-o' "${SQLITE_SHARE_NAME}.dll" '-shared' 'sqlite3.c'
+        } else {
+            @print 'unsupported operating system'
+            exit 1
+        }
+        // return to the original at working directory (at launch)
+        @chdir
+    }
+

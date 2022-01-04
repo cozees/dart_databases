@@ -70,7 +70,7 @@ void main(List<String> args) async {
   // download file
   if (result['download']) {
     await downloadSource(year, dversion, drelease[1], dverify);
-    await extractSource();
+    await extractSource(dversion);
     if (!result['build']) exit(0);
   }
   // if build flag set then output is required.

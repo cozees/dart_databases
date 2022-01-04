@@ -81,14 +81,15 @@ Future<void> downloadSource(String year, String dversion, String version, [Strin
   }
 }
 
-Future<void> extractSource() async {
+Future<void> extractSource(String dversion) async {
   final input = File(sourceFile).readAsBytesSync();
   // Decode the Zip file
   final archive = ZipDecoder().decodeBytes(input);
   // Extract the contents of the Zip archive to disk.
   print('Extract source file @$sourceDir from @$sourceFile ...');
   for (final file in archive) {
-    final outName = sourceDir + Platform.pathSeparator + file.name;
+    final outName =
+        sourceDir + Platform.pathSeparator + dversion + Platform.pathSeparator + file.name;
     if (file.isFile) {
       print('   extract $outName ...');
       final data = file.content as List<int>;

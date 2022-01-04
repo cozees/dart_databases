@@ -1,0 +1,39 @@
+include "Cookfile.sqlite"
+include "Cookfile.webassembly"
+
+COVERAGE = "coverage/test"
+
+initialize:
+    COVERAGE_IGNORE = @pabs "lib/src/sqlite"
+
+all:
+    @dsqlite_test_vm
+
+clean_coverage:
+    @rm "-s" "${COVERAGE}/*.info"
+    @rm "-s" "${COVERAGE}/*.json"
+
+dsqlite_build_coverage:
+    @print "Format coverage output"
+    COVERAGE_OUT = @pglob "${COVERAGE}/*.json"
+    for i, file in COVERAGE_OUT {
+        base = @pbase file
+        #pub 'run' 'coverage:format_coverage' '-l' '--check-ignore' '-i' file '-o' "${COVERAGE}/${base}.lcov.info" \
+                "--packages=.packages" "--report-on=lib"
+    }
+    @print "Combine coverage and generate html"
+    COVERAGE_INFO_OUT = @pglob "${COVERAGE}/*.info"
+    COVERAGE_ALL = []
+    for i, cov in COVERAGE_INFO_OUT {
+        COVERAGE_ALL += "--add-tracefile"
+        COVERAGE_ALL += cov
+    }
+    #lcov COVERAGE_ALL '--output-file' "${COVERAGE}/overall.info"
+
+dsqlite_test_vm:
+    @print "clean coverage ..."
+    @clean_coverage
+    #dart 'test' '--coverage' 'coverage' '--platform' 'vm' '--exclude-tags' 'version-solo'
+    #dart 'test' '--coverage' 'coverage' '--platform' 'vm' 'test/version_test.dart'
+    @print "build coverage"
+    @dsqlite_build_coverage

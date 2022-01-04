@@ -22,13 +22,14 @@ class _DNativeLibrary implements PlatformLibrary {
   // return relative only, Dynamic library need absolute path.
   String get _libPath {
     if (Platform.isMacOS) {
-      return ['sqlite', version, '.libs', 'libsqlite3.0.dylib'].join(Platform.pathSeparator);
+      return ['build', 'sqlite', version, 'sqlite-amalgamation-$version', 'libsqlite3.dylib']
+          .join(Platform.pathSeparator);
     } else if (Platform.isWindows) {
-      final fname = ['sqlite', version, 'sqlite3.dll'].join(Platform.pathSeparator);
-      if (File(fname).existsSync()) return fname;
-      return ['sqlite', version, 'winsqlite3.dll'].join(Platform.pathSeparator);
+      final fname = ['build', 'sqlite', version, 'sqlite-amalgamation-$version', 'libsqlite3.dll']
+          .join(Platform.pathSeparator);
     } else if (Platform.isLinux) {
-      return ['sqlite', version, '.libs', 'libsqlite3.so'].join(Platform.pathSeparator);
+      return ['build', 'sqlite', version, 'sqlite-amalgamation-$version', 'libsqlite3.so']
+          .join(Platform.pathSeparator);
     } else if (Platform.isAndroid) {
       // file '/system/lib/libsqlite.so' is only accessible to Java thus we it have to embedded;
       return 'libsqlite3.so';
