@@ -1,5 +1,5 @@
 name: database_sql
-version: 0.0.1
+version: 0.0.2
 description:
   Package database_sql provides a generic interface around SQL-like databases.
   The sql package must be used in conjunction with a database driver.
