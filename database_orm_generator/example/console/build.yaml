@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      database_orm_generator|class_builder:
+        # Only run this builder on the specified input.
+        generate_for:
+          - lib/src/student.dart

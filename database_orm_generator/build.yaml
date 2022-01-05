@@ -1,0 +1,9 @@
+builders:
+  # generate a class of represented table
+  class_builder:
+    import: "package:database_orm_generator/builder.dart"
+    builder_factories: ["classLibraryBuilder"]
+    build_extensions: {".dart": [".db.dart"]}
+    auto_apply: dependents
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
