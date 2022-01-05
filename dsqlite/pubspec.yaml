@@ -14,16 +14,18 @@ dependencies:
   ffi: ^1.1.2
   logging: ^1.0.2
   js: ^0.6.3
+  yaml: ^3.1.0
+  args: ^2.2.0
+  archive: ^3.1.6 # use by executable bin/dsqlite.dart to extract dart zip file.
+  pubspec_parse: ^1.1.0
+  package_config: ^2.0.2
 
-  database_sql: ^0.0.1
+  database_sql: ^0.0.2
 
 dev_dependencies:
   lints: ^1.0.0
   test: ^1.16.0
   async: ^2.8.2
-  archive: ^3.1.6 # use by executable bin/dsqlite.dart to extract dart zip file.
-  yaml: ^3.1.0
-  args: ^2.2.0
   http: ^0.13.3
   html: ^0.15.0
   html_unescape: ^2.0.0
@@ -31,10 +33,6 @@ dev_dependencies:
   dart_style: ^2.0.3
   coverage: ^1.0.3
   crypto: ^3.0.1
+  convert: ^3.0.1
   code_builder: ^4.1.0
-  pubspec_parse: ^1.1.0
-  package_config: ^2.0.2
-
-dependency_overrides:
-  database_sql:
-    path: ../database_sql
+  built_collection: ^5.1.1
